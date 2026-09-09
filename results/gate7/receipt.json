@@ -1,0 +1,35 @@
+{
+  "gate": "G7_operator_update_composition",
+  "claim_tested": "Two local low-rank operator updates add approximately when they are spatially separated, but may interact nonlinearly when they overlap.",
+  "result": "supported in the tested toy geometry",
+  "grid": 40,
+  "delay": 24,
+  "horizon": 25,
+  "epsilon_a": 0.1,
+  "tiny_a": 0.002,
+  "epsilon_b": 0.0005,
+  "pair_selection": "closest and farthest pairs by torus distance among the first 30 deterministic Gate-5 sites; no outcome-based pair selection",
+  "finite_A": {
+    "near_pairs": {
+      "distance": {"count": 8, "mean": 5.656854249492381, "median": 5.656854249492381, "min": 5.656854249492381, "max": 5.656854249492381},
+      "relative_nonadditivity": {"count": 8, "mean": 0.6540378708711558, "median": 0.6527316784593529, "min": 0.27647437171402467, "max": 1.2802943503053574},
+      "cosine_actual_vs_sum": {"count": 8, "mean": 0.8024901134861063, "median": 0.8398359758989349, "min": 0.4027240479418331, "max": 0.9670645051963676},
+      "actual_rank95": {"count": 8, "mean": 8.25, "median": 7.5, "min": 7.0, "max": 11.0},
+      "actual_effective_rank": {"count": 8, "mean": 5.468256112092091, "median": 5.373813068537794, "min": 4.419405309140662, "max": 7.338819195075623}
+    },
+    "far_pairs": {
+      "distance": {"count": 8, "mean": 28.284271247461902, "median": 28.284271247461902, "min": 28.284271247461902, "max": 28.284271247461902},
+      "relative_nonadditivity": {"count": 8, "mean": 4.4763436827290823e-11, "median": 4.217232032696461e-11, "min": 3.692559412600047e-11, "max": 6.207746437682905e-11},
+      "cosine_actual_vs_sum": {"count": 8, "mean": 1.0, "median": 1.0, "min": 1.0, "max": 1.0000000000000002},
+      "actual_rank95": {"count": 8, "mean": 9.75, "median": 9.5, "min": 8.0, "max": 13.0},
+      "actual_effective_rank": {"count": 8, "mean": 5.052589723106848, "median": 5.0883550646599005, "min": 3.9073947087255188, "max": 6.988072085446179}
+    }
+  },
+  "tiny_A_near_control": {
+    "pairs": 4,
+    "relative_nonadditivity": {"count": 4, "mean": 0.018770187757576755, "median": 0.014096369332380506, "min": 0.002728010921678346, "max": 0.04416000144386767},
+    "cosine_actual_vs_sum": {"count": 4, "mean": 0.9996919748716225, "median": 0.9998725926438309, "min": 0.9990245862154405, "max": 0.9999981279833876}
+  },
+  "interpretation": "At finite A=0.1, the eight farthest pairs are additive to numerical precision, while the eight closest pairs show large deviations from the sum of their individual operator updates. Repeating four near pairs with tiny A=0.002 moves them back toward superposition. In this toy field, interference therefore appears when low-rank local response updates overlap.",
+  "receipt_command": "python gate7_update_composition.py"
+}
