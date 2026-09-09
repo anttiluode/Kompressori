@@ -5,6 +5,8 @@ import kompressori as k
 import gate2_crossvalidate as g2
 import gate3_transfer as g3
 import gate5_unbiased_scan as g5
+import gate6_lowrank_update as g6
+import gate7_update_composition as g7
 
 
 class KompressoriTests(unittest.TestCase):
@@ -74,6 +76,21 @@ class KompressoriTests(unittest.TestCase):
         self.assertAlmostEqual(s["mean"], 1.1)
         self.assertAlmostEqual(s["fraction_gain_gt_1_1"], 0.5)
         self.assertAlmostEqual(s["fraction_gain_lt_0_9"], 0.25)
+
+    def test_gate6_whitening_makes_input_gram_identity(self):
+        x = np.array([[1.0, 0.2], [0.3, 1.0], [0.4, 0.5]])
+        w = g6.whitening_from_inputs(x)
+        gram = w @ (x.T @ x) @ w
+        self.assertTrue(np.allclose(gram, np.eye(2), atol=1e-10))
+
+    def test_gate6_spectrum_summary_has_expected_rank(self):
+        s = g6.spectrum_summary(np.array([9.0, 1.0, 0.0]))
+        self.assertEqual(s["rank90"], 1)
+        self.assertEqual(s["rank95"], 2)
+        self.assertLess(s["effective_rank"], 2.0)
+
+    def test_gate7_torus_distance_wraps(self):
+        self.assertAlmostEqual(g7.torus_distance((1, 1), (39, 1), 40), 2.0)
 
 
 if __name__ == "__main__":
