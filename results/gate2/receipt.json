@@ -1,0 +1,84 @@
+{
+  "gate": "G2_response_guard_crossvalidation",
+  "claim_tested": "A sparse compression chosen using a few response probes will preserve the response geometry for unseen perturbation directions.",
+  "result": "not supported in this run",
+  "grid": 36,
+  "target_steps": 350,
+  "horizon": 25,
+  "fraction": 0.05,
+  "candidates": 140,
+  "probes": 8,
+  "splits": 6,
+  "future_top_fraction": 0.25,
+  "future_threshold": 0.19961097145549853,
+  "eligible_candidates": 35,
+  "probe_epsilon": 0.002,
+  "future_only_best_future_corr": 0.2791502877376793,
+  "probe_locations": [
+    {"probe": 0, "x": 14.431518544158536, "y": 11.756757093873311},
+    {"probe": 1, "x": 9.553301889046171, "y": 25.62813148538567},
+    {"probe": 2, "x": 27.472105661907282, "y": 1.5458433249051224},
+    {"probe": 3, "x": 9.197238338325468, "y": 20.96860451585037},
+    {"probe": 4, "x": 0.36412220249469796, "y": 11.670510336173901},
+    {"probe": 5, "x": 19.68469405956643, "y": 17.896545454596254},
+    {"probe": 6, "x": 11.041457511636361, "y": 26.556224964292536},
+    {"probe": 7, "x": 33.27999813829563, "y": 19.433675453624968}
+  ],
+  "aggregate": {
+    "future_only_train_response_corr": 0.05002119109211872,
+    "future_only_train_response_rel_error": 2.160696855777078,
+    "future_only_test_response_corr": 0.10752517007029831,
+    "future_only_test_response_rel_error": 2.0350411188451143,
+    "response_aware_train_response_corr": 0.17655527978834526,
+    "response_aware_train_response_rel_error": 1.8259991952521941,
+    "response_aware_test_response_corr": 0.07566097818408664,
+    "response_aware_test_response_rel_error": 2.130876460497534,
+    "response_aware_future_corr": 0.21244651834492714
+  },
+  "splits_detail": [
+    {
+      "split": 0,
+      "train_probes": [0, 7, 4, 6],
+      "test_probes": [2, 3, 5, 1],
+      "future_only": {"candidate": 65, "future_corr": 0.2791502877376793, "train": {"response_corr": -0.10048080972960938, "response_rel_error": 2.2834809582830413, "response_gain": 1.9726598668668587}, "test": {"response_corr": 0.25802717089202637, "response_rel_error": 1.9122570163391512, "response_gain": 1.8827267203428344}},
+      "response_aware": {"candidate": 132, "future_corr": 0.2091815690583512, "train": {"response_corr": 0.24237357963238994, "response_rel_error": 1.8829920493241874, "response_gain": 1.7957559158524522}, "test": {"response_corr": 0.20680284177524233, "response_rel_error": 2.0672072230023586, "response_gain": 1.995552887586564}}
+    },
+    {
+      "split": 1,
+      "train_probes": [7, 4, 1, 3],
+      "test_probes": [5, 2, 0, 6],
+      "future_only": {"candidate": 65, "future_corr": 0.2791502877376793, "train": {"response_corr": -0.08950115272002529, "response_rel_error": 2.290224097631546, "response_gain": 1.995723495673885}, "test": {"response_corr": 0.24704751388244234, "response_rel_error": 1.9055138769906461, "response_gain": 1.859663091535808}},
+      "response_aware": {"candidate": 70, "future_corr": 0.22684589863290033, "train": {"response_corr": 0.1635515439801266, "response_rel_error": 2.0595207294744027, "response_gain": 2.0022756626709046}, "test": {"response_corr": 0.1908989352741915, "response_rel_error": 2.053502988670018, "response_gain": 1.9644288234391218}}
+    },
+    {
+      "split": 2,
+      "train_probes": [2, 0, 6, 5],
+      "test_probes": [1, 4, 7, 3],
+      "future_only": {"candidate": 65, "future_corr": 0.2791502877376793, "train": {"response_corr": 0.24704751388244234, "response_rel_error": 1.9055138769906461, "response_gain": 1.859663091535808}, "test": {"response_corr": -0.08950115272002529, "response_rel_error": 2.290224097631546, "response_gain": 1.995723495673885}},
+      "response_aware": {"candidate": 17, "future_corr": 0.2102866235220854, "train": {"response_corr": 0.28146364567628587, "response_rel_error": 1.4926455207806528, "response_gain": 1.4266936863540485}, "test": {"response_corr": -0.12010493832660815, "response_rel_error": 2.3824825668110075, "response_gain": 2.1214547974582536}}
+    },
+    {
+      "split": 3,
+      "train_probes": [5, 0, 3, 2],
+      "test_probes": [4, 6, 7, 1],
+      "future_only": {"candidate": 65, "future_corr": 0.2791502877376793, "train": {"response_corr": 0.14537631554393604, "response_rel_error": 1.8478912024135319, "response_gain": 1.802349912933606}, "test": {"response_corr": 0.012170045618480979, "response_rel_error": 2.3478467722086607, "response_gain": 2.052975168687947}},
+      "response_aware": {"candidate": 67, "future_corr": 0.20415280197458968, "train": {"response_corr": 0.2807619532264077, "response_rel_error": 1.6363861773657433, "response_gain": 1.5336613433479065}, "test": {"response_corr": -0.011852118918788158, "response_rel_error": 2.379560154566314, "response_gain": 2.1485083432226013}}
+    },
+    {
+      "split": 4,
+      "train_probes": [2, 1, 0, 3],
+      "test_probes": [7, 4, 6, 5],
+      "future_only": {"candidate": 65, "future_corr": 0.2791502877376793, "train": {"response_corr": 0.08551523395748765, "response_rel_error": 2.2892242263101954, "response_gain": 2.040435942118276}, "test": {"response_corr": 0.07203112720492938, "response_rel_error": 1.9065137474871512, "response_gain": 1.8148891395032772}},
+      "response_aware": {"candidate": 22, "future_corr": 0.21187079350611498, "train": {"response_corr": 0.07667627877458442, "response_rel_error": 1.9772646101480893, "response_gain": 1.8803068437798717}, "test": {"response_corr": 0.06276827552054218, "response_rel_error": 1.97850700678296, "response_gain": 1.8905747537298548}}
+    },
+    {
+      "split": 5,
+      "train_probes": [0, 7, 6, 1],
+      "test_probes": [5, 4, 3, 2],
+      "future_only": {"candidate": 65, "future_corr": 0.2791502877376793, "train": {"response_corr": 0.012170045618480979, "response_rel_error": 2.3478467722086607, "response_gain": 2.052975168687947}, "test": {"response_corr": 0.14537631554393604, "response_rel_error": 1.8478912024135319, "response_gain": 1.802349912933606}},
+      "response_aware": {"candidate": 14, "future_corr": 0.21234142337552128, "train": {"response_corr": 0.014504677440277014, "response_rel_error": 1.9071860844200885, "response_gain": 1.7630389474313852}, "test": {"response_corr": 0.12545287377994013, "response_rel_error": 1.9239988231525462, "response_gain": 1.8007053536243728}}
+    }
+  ],
+  "interpretation": "The response-aware selector fits its training perturbations better, but in the supplied run that advantage does not survive held-out perturbation directions. At this 5% state-only budget, checking a small probe set is therefore not enough to certify the local future operator. This is a property of this toy experiment, not a general theorem.",
+  "receipt_command": "python gate2_crossvalidate.py --grid 36 --horizon 25 --candidates 140 --probes 8 --splits 6"
+}
