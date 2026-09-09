@@ -1,0 +1,88 @@
+{
+  "gate": "G5_deterministic_transfer_scan",
+  "claim_tested": "Gate 3's local A->B susceptibility is not merely an artifact of post-selecting pair 49.",
+  "result": "supported for a common near-field nonlinear effect; not supported as a travelling or long-range cascade",
+  "grid": 40,
+  "target_steps": 350,
+  "horizon": 25,
+  "epsilon_a": 0.1,
+  "epsilon_b": 0.002,
+  "a_locations": {
+    "count": 30,
+    "rule": "x=(7+13*i)%40, y=(3+17*i)%40 for i=0..29",
+    "coordinates": [
+      {"x": 7, "y": 3}, {"x": 20, "y": 20}, {"x": 33, "y": 37},
+      {"x": 6, "y": 14}, {"x": 19, "y": 31}, {"x": 32, "y": 8},
+      {"x": 5, "y": 25}, {"x": 18, "y": 2}, {"x": 31, "y": 19},
+      {"x": 4, "y": 36}, {"x": 17, "y": 13}, {"x": 30, "y": 30},
+      {"x": 3, "y": 7}, {"x": 16, "y": 24}, {"x": 29, "y": 1},
+      {"x": 2, "y": 18}, {"x": 15, "y": 35}, {"x": 28, "y": 12},
+      {"x": 1, "y": 29}, {"x": 14, "y": 6}, {"x": 27, "y": 23},
+      {"x": 0, "y": 0}, {"x": 13, "y": 17}, {"x": 26, "y": 34},
+      {"x": 39, "y": 11}, {"x": 12, "y": 28}, {"x": 25, "y": 5},
+      {"x": 38, "y": 22}, {"x": 11, "y": 39}, {"x": 24, "y": 16}
+    ]
+  },
+  "delays": [12, 18, 24, 30, 36],
+  "radii": [2, 4, 8, 12],
+  "directions": ["+x", "-x", "+y", "-y"],
+  "events": 2400,
+  "overall": {
+    "count": 2400,
+    "mean": 1.048990746508767,
+    "median": 1.0000014741171026,
+    "min": 0.5116019961666087,
+    "max": 2.305013160093675,
+    "p05": 0.9060129016649419,
+    "p90": 1.22787684649334,
+    "p95": 1.3777868320722462,
+    "fraction_gain_gt_1_1": 0.17875,
+    "fraction_gain_gt_1_2": 0.11791666666666667,
+    "fraction_gain_lt_0_9": 0.04666666666666667
+  },
+  "near_field_r_le_4": {
+    "count": 1200,
+    "mean": 1.1001811332174072,
+    "median": 1.0397318997993756,
+    "min": 0.5116019961666087,
+    "max": 2.305013160093675,
+    "p05": 0.8414667521908856,
+    "p90": 1.3778076578311125,
+    "p95": 1.5565022515351434,
+    "fraction_gain_gt_1_1": 0.3575,
+    "fraction_gain_gt_1_2": 0.23583333333333334,
+    "fraction_gain_lt_0_9": 0.09083333333333334
+  },
+  "far_field_r_ge_8": {
+    "count": 1200,
+    "mean": 0.9978003598001266,
+    "median": 0.9999865864636892,
+    "min": 0.8964078067895844,
+    "max": 1.016662916771898,
+    "p05": 0.9846816714858556,
+    "p90": 1.0017260414171112,
+    "p95": 1.0060356772487933,
+    "fraction_gain_gt_1_1": 0.0,
+    "fraction_gain_gt_1_2": 0.0,
+    "fraction_gain_lt_0_9": 0.0025
+  },
+  "by_radius": {
+    "2": {"count": 600, "mean": 1.1511074229817175, "median": 1.07864135939587, "min": 0.5235570404670715, "max": 2.305013160093675, "p05": 0.8510503060114673, "p90": 1.5013966912728733, "p95": 1.7161963024792377, "fraction_gain_gt_1_1": 0.455, "fraction_gain_gt_1_2": 0.325, "fraction_gain_lt_0_9": 0.07833333333333334},
+    "4": {"count": 600, "mean": 1.0492548434530968, "median": 1.019608325156281, "min": 0.5116019961666087, "max": 1.6844666562199009, "p05": 0.8374653134688221, "p90": 1.229915624533804, "p95": 1.3554159318755625, "fraction_gain_gt_1_1": 0.26, "fraction_gain_gt_1_2": 0.14666666666666667, "fraction_gain_lt_0_9": 0.10333333333333333},
+    "8": {"count": 600, "mean": 0.995694818577667, "median": 0.9990943084666253, "min": 0.8964078067895844, "max": 1.016662916771898, "p05": 0.9724865165417369, "p90": 1.0060356772487968, "p95": 1.0101763108052548, "fraction_gain_gt_1_1": 0.0, "fraction_gain_gt_1_2": 0.0, "fraction_gain_lt_0_9": 0.005},
+    "12": {"count": 600, "mean": 0.9999059010225861, "median": 0.9999941025691512, "min": 0.9941694428579725, "max": 1.0008642125193863, "p05": 0.9995147148689246, "p90": 1.000082247349539, "p95": 1.0001502420104489, "fraction_gain_gt_1_1": 0.0, "fraction_gain_gt_1_2": 0.0, "fraction_gain_lt_0_9": 0.0}
+  },
+  "by_delay": {
+    "12": {"count": 480, "mean": 1.0037487512306271, "median": 0.9999884819887488, "min": 0.5235570404670715, "max": 1.8832738941912202, "p05": 0.8287445841135914, "p90": 1.1103850749918933, "p95": 1.201297180659684, "fraction_gain_gt_1_1": 0.10625, "fraction_gain_gt_1_2": 0.06041666666666667, "fraction_gain_lt_0_9": 0.1125},
+    "18": {"count": 480, "mean": 1.048564237074371, "median": 0.9999925453038802, "min": 0.5116019961666087, "max": 2.305013160093675, "p05": 0.809449186731475, "p90": 1.2612112098206865, "p95": 1.4175542160251806, "fraction_gain_gt_1_1": 0.175, "fraction_gain_gt_1_2": 0.12916666666666668, "fraction_gain_lt_0_9": 0.08125},
+    "24": {"count": 480, "mean": 1.0823522794492022, "median": 1.0000185301373699, "min": 0.8728242947609557, "max": 1.7330288386913684, "p05": 0.9256216522804112, "p90": 1.39689568306423, "p95": 1.5688789959562095, "fraction_gain_gt_1_1": 0.23333333333333334, "fraction_gain_gt_1_2": 0.16666666666666666, "fraction_gain_lt_0_9": 0.027083333333333334},
+    "30": {"count": 480, "mean": 1.0673760105883698, "median": 1.0000375942088935, "min": 0.8216675559218498, "max": 1.8288927460809485, "p05": 0.946514592766778, "p90": 1.2316851878118105, "p95": 1.3748107456989256, "fraction_gain_gt_1_1": 0.225, "fraction_gain_gt_1_2": 0.13958333333333334, "fraction_gain_lt_0_9": 0.0125},
+    "36": {"count": 480, "mean": 1.0429124542012644, "median": 1.0001378452312615, "min": 0.9342955436652938, "max": 1.6691839016730774, "p05": 0.9725189895175801, "p90": 1.173671745725222, "p95": 1.270768078335789, "fraction_gain_gt_1_1": 0.15416666666666667, "fraction_gain_gt_1_2": 0.09375, "fraction_gain_lt_0_9": 0.0}
+  },
+  "best_event": {"a_x": 13, "a_y": 17, "b_x": 13, "b_y": 15, "radius": 2, "direction": "-y", "delay": 18, "transfer_gain": 2.305013160093675, "response_corr": 0.45474450880637896, "prepared_state_relative_change": 0.042945144952393065, "local_preparation_rms_at_b": 0.5326478478661335},
+  "worst_event": {"a_x": 7, "a_y": 3, "b_x": 3, "b_y": 3, "radius": 4, "direction": "-x", "delay": 18, "transfer_gain": 0.5116019961666087, "response_corr": 0.4795681424705761, "prepared_state_relative_change": 0.05014952488069524, "local_preparation_rms_at_b": 0.3036788889138028},
+  "tiny_a_control_at_delay_24_radii_2_4": {"count": 240, "mean": 0.9927704928101326, "std": 0.015193782812800129, "min": 0.9097044315501739, "max": 1.0044611755825248, "p95": 1.0011058615840622},
+  "gain_vs_local_preparation_rms_pearson": 0.3856100723394322,
+  "interpretation": "Without selecting A/B pairs by outcome, finite A commonly changes the gain of nearby B probes. The effect decays sharply with distance: in the default run no radius-8 or radius-12 event exceeds gain 1.1. Tiny A at the same near-field locations stays approximately linear. The scan therefore validates a local nonlinear susceptibility effect in this toy field, while arguing against the more seductive story of a travelling or long-range amplification cascade.",
+  "receipt_command": "python gate5_unbiased_scan.py"
+}
