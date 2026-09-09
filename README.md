@@ -105,6 +105,50 @@ The effect is also strongly local in this search. For A/B separations above 15 c
 
 This is the first result here that resembles the abstract **parent → changes geometry → child sees a different amplifier** idea. But the qualification matters: pair 49 was deliberately selected as the maximum-gain example out of 300. Gate 3 is therefore an **existence demonstration in this toy field**, not evidence that amplification is common, not fluid blowup, and not a brain mechanism.
 
+## Gate 4 — the amplifier is a local susceptibility window
+
+Gate 4 takes the post-selected Gate 3 pair seriously enough to characterize it, but **not** as independent evidence. We hold A and B fixed and vary the delay, then at the best delay hold A fixed and scan B over 400 positions.
+
+The first surprise is temporal. The same A/B pair is not simply "stronger after A":
+
+- delay `0`: gain **1.136×**
+- delay `6`: gain **0.967×** — slight suppression
+- delay `18`: gain **1.346×**
+- delay `21`: gain **1.526×**
+- delay `24`: gain **1.624×** — peak
+- delay `30`: gain **1.322×**
+- delay `48`: gain **0.970×**
+- delay `57`: gain **0.764×**
+
+![Gate 4 delay sweep](results/gate4/delay_sweep.svg)
+
+So A creates a **finite susceptibility window**, not a monotonic increase in gain.
+
+The second surprise is spatial. At the peak delay (`24`), B was placed on a 20×20 grid of positions across the periodic field. Out of 400 locations:
+
+- mean gain: **1.011×**
+- 95th percentile: **1.029×**
+- only **13 / 400** positions exceeded `1.1×`
+- only **3 / 400** exceeded `1.4×`
+- maximum: **1.647×** at `(16, 32)`, only **2.13 cells** from A's center
+
+That makes the Gate 3 effect look much less like a globally growing mode and much more like a **temporary local pocket of altered response geometry**.
+
+This matters for the Euler analogy too. The useful abstraction was never "PhiWorld blows up like Euler." Gate 4 says our toy effect is currently more modest and more specific:
+
+```text
+A happens
+   ↓
+local state geometry changes
+   ↓
+a nearby B arriving in the right time window
+sees a different gain
+   ↓
+the window later closes / reverses
+```
+
+That is already enough to make "future sensitivity" a dynamical object rather than a fixed property of the state snapshot.
+
 ## Why the old PhiWorld result belongs here
 
 The predecessor probe tested partial-field completion in two modes: one-shot partial initial state and continuous trajectory clamping. It explicitly measured only hidden cells. The old result did **not** show a holographic reconstruction attractor: distributed random samples helped more than compact center/ring cues, but even 50% random observation only reached modest hidden correlation, and no mask reached 0.75 mean correlation in the supplied run.
@@ -142,6 +186,7 @@ python kompressori.py
 python gate1_search.py
 python gate2_crossvalidate.py
 python gate3_transfer.py
+python gate4_kernel.py
 ```
 
 The longer supplied receipts used:
@@ -150,6 +195,7 @@ The longer supplied receipts used:
 python gate1_search.py --horizon 50 --candidates 200 --probe-seeds 5
 python gate2_crossvalidate.py --grid 36 --horizon 25 --candidates 140 --probes 8 --splits 6
 python gate3_transfer.py --grid 40 --delay 20 --horizon 25 --pairs 300 --small-a .002 --search-a .1 --epsilon-b .002
+python gate4_kernel.py --grid 40 --pair 49 --epsilon-a .1 --epsilon-b .002 --horizon 25 --delay-max 60 --delay-step 3 --map-step 2
 ```
 
 ## Repo map
@@ -158,11 +204,14 @@ python gate3_transfer.py --grid 40 --delay 20 --horizon 25 --pairs 300 --small-a
 - `gate1_search.py` — future-only mask search, followed by unseen response tests
 - `gate2_crossvalidate.py` — response-aware guard with held-out perturbation directions
 - `gate3_transfer.py` — A→B perturbation-transfer search
+- `gate4_kernel.py` — temporal and spatial transfer-kernel characterization
 - `results/gate0/receipt.json` — Gate 0 receipt
 - `results/gate1/receipt.json` — Gate 1 receipt
 - `results/gate2/receipt.json` — Gate 2 receipt
 - `results/gate3/receipt.json` — Gate 3 receipt
 - `results/gate3/amplitude_sweep.svg` — Gate 3 visual
+- `results/gate4/receipt.json` — Gate 4 receipt
+- `results/gate4/delay_sweep.svg` — Gate 4 visual
 - `legacy/phiworld_completion_probe.py` — predecessor experiment
 - `legacy/completion_summary.json` — predecessor receipt supplied with the experiment
 - `index.html` — dependency-free visual summary for GitHub Pages
@@ -170,9 +219,9 @@ python gate3_transfer.py --grid 40 --delay 20 --horizon 25 --pairs 300 --small-a
 
 ## Next gates
 
-- **G4 — transfer map:** map `A location × delay × B location` instead of post-selecting one pair. Is the transfer kernel wave-like, advective, ring-like, or tied to PhiWorld's existing structures?
-- **G5 — operator compression:** stop asking a sparse state mask to do the impossible. Compare state-only compression with a small tangent/impulse sketch. How many response directions must be retained before held-out perturbations become predictable?
-- **G6 — slow substrate:** let response geometry itself change slowly and ask which constraints prevent a local A→B amplifier from becoming runaway self-amplification.
-- **G7 — learning guard:** move the distinction into an adaptive model: preserve stored answers versus preserve nearby impulse/Jacobian responses around them.
+- **G5 — independent transfer scan:** stop leaning on post-selected pair 49. Pre-register a coarse A×B×delay scan and ask how often local susceptibility windows occur across the field.
+- **G6 — operator compression:** stop asking a sparse state mask to do the impossible. Compare state-only compression with a small tangent/impulse sketch. How many response directions must be retained before held-out perturbations become predictable?
+- **G7 — slow substrate:** let response geometry itself change slowly and ask which constraints prevent a local A→B amplifier from becoming runaway self-amplification.
+- **G8 — learning guard:** move the distinction into an adaptive model: preserve stored answers versus preserve nearby impulse/Jacobian responses around them.
 
 The repo succeeds if these gates kill the seductive story quickly or turn it into a measurable mechanism.
