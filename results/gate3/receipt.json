@@ -1,0 +1,72 @@
+{
+  "gate": "G3_perturbation_transfer",
+  "claim_tested": "A finite perturbation can prepare the field so that a later small perturbation has a different finite-time gain.",
+  "result": "existence example found in the searched toy system",
+  "selection_warning": "The reported pair is the maximum-gain pair selected from the finite-A scan. Its amplitude sweep characterizes that discovered example and must not be read as a prevalence estimate.",
+  "grid": 40,
+  "target_steps": 350,
+  "delay": 20,
+  "horizon": 25,
+  "pairs": 300,
+  "epsilon_b": 0.002,
+  "small_a": 0.002,
+  "search_a": 0.1,
+  "small_a_scan": {
+    "min": 0.9186522313623191,
+    "max": 1.0002879108230458,
+    "mean": 0.9992174353046627,
+    "std": 0.006798792110029795,
+    "p05": 0.9991394007453854,
+    "p50": 0.9999999999924952,
+    "p95": 1.000002337649558
+  },
+  "finite_a_scan": {
+    "min": 0.8090008293945917,
+    "max": 1.4663696632930707,
+    "mean": 0.9979979144438742,
+    "std": 0.042856861730943406,
+    "p05": 0.9783645666721961,
+    "p50": 0.9999999997876947,
+    "p95": 1.0002762335847029
+  },
+  "best_pair": {
+    "pair": 49,
+    "transfer_gain": 1.4663696632930707,
+    "response_corr": 0.8855232213595569,
+    "prepared_state_relative_change": 0.05075796513116128,
+    "a_x": 18.110998314992383,
+    "a_y": 31.709196119273635,
+    "b_x": 15.738897408083453,
+    "b_y": 31.95265249091079,
+    "packet_distance": 2.384561535680909
+  },
+  "distance_bins_at_search_a": [
+    {"min_distance": 0, "max_distance": 5, "count": 18, "mean_gain": 0.998546050076641, "median_gain": 0.9697412488074437, "p95_gain": 1.3383404955542533, "max_gain": 1.4663696632930707},
+    {"min_distance": 5, "max_distance": 10, "count": 41, "mean_gain": 0.9865516699416185, "median_gain": 0.9996650665629064, "p95_gain": 1.0045295499134532, "max_gain": 1.015995526722144},
+    {"min_distance": 10, "max_distance": 15, "count": 73, "mean_gain": 0.9996840444024765, "median_gain": 0.9999954153616921, "p95_gain": 1.0000139105393289, "max_gain": 1.0001182675919411},
+    {"min_distance": 15, "max_distance": null, "count": 168, "mean_gain": 0.9999999507309261, "median_gain": 0.999999999993874, "p95_gain": 1.0000000021740862, "max_gain": 1.00000047373527}
+  ],
+  "best_pair_amplitude_sweep": [
+    {"epsilon_a": 0.0, "pair": 49, "transfer_gain": 0.9999999999999976, "response_corr": 0.9999999999999998, "prepared_state_relative_change": 0.0, "a_x": 18.110998314992383, "a_y": 31.709196119273635, "b_x": 15.738897408083453, "b_y": 31.95265249091079, "packet_distance": 2.384561535680909},
+    {"epsilon_a": 0.002, "pair": 49, "transfer_gain": 0.9989970930151025, "response_corr": 0.9999401448750059, "prepared_state_relative_change": 0.0009477140644052957, "a_x": 18.110998314992383, "a_y": 31.709196119273635, "b_x": 15.738897408083453, "b_y": 31.95265249091079, "packet_distance": 2.384561535680909},
+    {"epsilon_a": 0.005, "pair": 49, "transfer_gain": 0.9957013606869768, "response_corr": 0.9995414625839608, "prepared_state_relative_change": 0.002386030220426494, "a_x": 18.110998314992383, "a_y": 31.709196119273635, "b_x": 15.738897408083453, "b_y": 31.95265249091079, "packet_distance": 2.384561535680909},
+    {"epsilon_a": 0.01, "pair": 49, "transfer_gain": 0.9860785595895502, "response_corr": 0.9975455686434564, "prepared_state_relative_change": 0.004822752038834766, "a_x": 18.110998314992383, "a_y": 31.709196119273635, "b_x": 15.738897408083453, "b_y": 31.95265249091079, "packet_distance": 2.384561535680909},
+    {"epsilon_a": 0.02, "pair": 49, "transfer_gain": 0.958184826116769, "response_corr": 0.9873043615843891, "prepared_state_relative_change": 0.00981106419808854, "a_x": 18.110998314992383, "a_y": 31.709196119273635, "b_x": 15.738897408083453, "b_y": 31.95265249091079, "packet_distance": 2.384561535680909},
+    {"epsilon_a": 0.03, "pair": 49, "transfer_gain": 0.9289565501373037, "response_corr": 0.974594996950426, "prepared_state_relative_change": 0.01489809589717462, "a_x": 18.110998314992383, "a_y": 31.709196119273635, "b_x": 15.738897408083453, "b_y": 31.95265249091079, "packet_distance": 2.384561535680909},
+    {"epsilon_a": 0.05, "pair": 49, "transfer_gain": 0.9501591285250479, "response_corr": 0.9536749745569825, "prepared_state_relative_change": 0.025180244427673155, "a_x": 18.110998314992383, "a_y": 31.709196119273635, "b_x": 15.738897408083453, "b_y": 31.95265249091079, "packet_distance": 2.384561535680909},
+    {"epsilon_a": 0.07, "pair": 49, "transfer_gain": 1.2551545771900978, "response_corr": 0.8721031719568167, "prepared_state_relative_change": 0.03542403942819916, "a_x": 18.110998314992383, "a_y": 31.709196119273635, "b_x": 15.738897408083453, "b_y": 31.95265249091079, "packet_distance": 2.384561535680909},
+    {"epsilon_a": 0.1, "pair": 49, "transfer_gain": 1.4663696632930707, "response_corr": 0.8855232213595569, "prepared_state_relative_change": 0.05075796513116128, "a_x": 18.110998314992383, "a_y": 31.709196119273635, "b_x": 15.738897408083453, "b_y": 31.95265249091079, "packet_distance": 2.384561535680909},
+    {"epsilon_a": 0.12, "pair": 49, "transfer_gain": 1.3615057820233443, "response_corr": 0.8906263408489977, "prepared_state_relative_change": 0.06161778639676667, "a_x": 18.110998314992383, "a_y": 31.709196119273635, "b_x": 15.738897408083453, "b_y": 31.95265249091079, "packet_distance": 2.384561535680909},
+    {"epsilon_a": 0.15, "pair": 49, "transfer_gain": 1.2229779072184894, "response_corr": 0.8152601918272538, "prepared_state_relative_change": 0.0800635745381046, "a_x": 18.110998314992383, "a_y": 31.709196119273635, "b_x": 15.738897408083453, "b_y": 31.95265249091079, "packet_distance": 2.384561535680909},
+    {"epsilon_a": 0.2, "pair": 49, "transfer_gain": 1.166136144900903, "response_corr": 0.6470363648053808, "prepared_state_relative_change": 0.11838776282503725, "a_x": 18.110998314992383, "a_y": 31.709196119273635, "b_x": 15.738897408083453, "b_y": 31.95265249091079, "packet_distance": 2.384561535680909}
+  ],
+  "best_pair_b_epsilon_check": [
+    {"epsilon_b": 0.0005, "transfer_gain": 1.4707507894756262, "response_corr": 0.8853582736584531},
+    {"epsilon_b": 0.001, "transfer_gain": 1.4692748987525168, "response_corr": 0.8854187521367549},
+    {"epsilon_b": 0.002, "transfer_gain": 1.4663696632930707, "response_corr": 0.8855232213595569},
+    {"epsilon_b": 0.004, "transfer_gain": 1.4607583769951489, "response_corr": 0.8856657277195079},
+    {"epsilon_b": 0.008, "transfer_gain": 1.4503979733267556, "response_corr": 0.885690411958989}
+  ],
+  "interpretation": "At tiny A the searched system is almost in the linear superposition regime: the maximum transfer gain stays approximately one. A rare nearby A/B pair at finite A changes the later B response substantially. The effect is local in this scan and appears only after A has moved the delayed state by a few percent. This is a nonlinear response-geometry effect in PhiWorld, not an Euler/Navier-Stokes result.",
+  "receipt_command": "python gate3_transfer.py --grid 40 --delay 20 --horizon 25 --pairs 300 --small-a .002 --search-a .1 --epsilon-b .002"
+}
