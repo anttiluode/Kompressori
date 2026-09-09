@@ -1,0 +1,83 @@
+{
+  "gate": "G6_low_rank_operator_update",
+  "claim_tested": "Although the sampled finite-time response operator is high-rank, the change in that operator induced by one local finite perturbation may be much lower-rank.",
+  "result": "supported in this toy response basis",
+  "grid": 40,
+  "target_steps": 350,
+  "delay": 24,
+  "horizon": 25,
+  "packet_step": 4,
+  "response_directions": 100,
+  "epsilon_a": 0.1,
+  "epsilon_b": 0.0005,
+  "a_locations": {
+    "count": 30,
+    "rule": "same deterministic modular sequence as Gate 5; first 30 sites"
+  },
+  "basis_note": "Gaussian input packets overlap. Their Gram matrix is whitened before computing generalized singular spectra.",
+  "base_operator": {
+    "rank50": 33,
+    "rank75": 60,
+    "rank90": 82,
+    "rank95": 91,
+    "rank99": 98,
+    "effective_rank": 80.02047053610053,
+    "generalized_frobenius": 49.33634480805716,
+    "sv2_over_sv1": 0.9992260754186052
+  },
+  "delta_operator_across_A": {
+    "effective_rank": {
+      "count": 30,
+      "mean": 3.11569824045212,
+      "median": 2.7531754962148867,
+      "min": 1.8510612933100254,
+      "max": 6.450814745397832,
+      "p05": 2.12210249203248,
+      "p95": 5.022526275047985
+    },
+    "rank90": {
+      "count": 30,
+      "mean": 4.033333333333333,
+      "median": 4.0,
+      "min": 3.0,
+      "max": 7.0,
+      "p05": 3.0,
+      "p95": 5.55
+    },
+    "rank95": {
+      "count": 30,
+      "mean": 5.366666666666666,
+      "median": 5.0,
+      "min": 4.0,
+      "max": 9.0,
+      "p05": 4.0,
+      "p95": 7.1
+    },
+    "rank99": {
+      "count": 30,
+      "mean": 8.3,
+      "median": 8.0,
+      "min": 7.0,
+      "max": 13.0,
+      "p05": 7.0,
+      "p95": 11.1
+    },
+    "delta_over_base_frobenius": {
+      "count": 30,
+      "mean": 0.16796667873158908,
+      "median": 0.15477554616848957,
+      "min": 0.09334184491333215,
+      "max": 0.23067310515157244,
+      "p05": 0.09412509982607173,
+      "p95": 0.23067310515113676
+    }
+  },
+  "representative_A": [
+    {"a_x": 7, "a_y": 3, "rank95": 6, "rank99": 9, "effective_rank": 4.0344266807, "delta_over_base_frobenius": 0.2306731052},
+    {"a_x": 20, "a_y": 20, "rank95": 5, "rank99": 8, "effective_rank": 1.8510612933, "delta_over_base_frobenius": 0.1079866028},
+    {"a_x": 32, "a_y": 8, "rank95": 9, "rank99": 13, "effective_rank": 6.4508147454, "delta_over_base_frobenius": 0.0950824114},
+    {"a_x": 13, "a_y": 17, "rank95": 4, "rank99": 7, "effective_rank": 2.122102492, "delta_over_base_frobenius": 0.135496266}
+  ],
+  "interpretation": "In the supplied 30-A run the base operator needs 91 of 100 sampled directions for 95% spectral energy, while a single A-induced operator change needs a median of only 5. Its median effective rank is about 2.75, even though its generalized Frobenius norm is about 15.5% of the base operator. This suggests that the compressible object may be the local operator update rather than the whole operator. It is a toy finite-difference result, not evidence for a biological or Navier-Stokes mechanism.",
+  "receipt_command": "python gate6_lowrank_update.py --a-count 30"
+}
