@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="460" viewBox="0 0 900 460" role="img" aria-labelledby="title desc">
+<title id="title">Gate 4 delay sweep</title>
+<desc id="desc">The post-selected A/B interaction has a finite temporal susceptibility window. Transfer gain peaks at 1.624 at delay 24, then falls below one after delay 48.</desc>
+<rect width="900" height="460" rx="22" fill="#0f1218"/>
+<text x="70" y="28" fill="#eef2ff" font-family="system-ui,sans-serif" font-size="20" font-weight="700">Gate 4 — the amplifier is a time window</text>
+<text x="70" y="50" fill="#9aa4bd" font-family="system-ui,sans-serif" font-size="13">Gate 3 pair 49; εA=0.1, εB=0.002; post-selected characterization</text>
+<line x1="70" y1="350" x2="790" y2="350" stroke="#49546b"/><line x1="70" y1="55" x2="70" y2="350" stroke="#49546b"/>
+<g fill="#9aa4bd" font-family="system-ui,sans-serif" font-size="12">
+ <line x1="70" y1="320.5" x2="790" y2="320.5" stroke="#232a38"/><text x="34" y="324">0.8</text>
+ <line x1="70" y1="261.5" x2="790" y2="261.5" stroke="#6f7788" stroke-dasharray="5 5"/><text x="34" y="265">1.0</text>
+ <line x1="70" y1="202.5" x2="790" y2="202.5" stroke="#232a38"/><text x="34" y="206">1.2</text>
+ <line x1="70" y1="143.5" x2="790" y2="143.5" stroke="#232a38"/><text x="34" y="147">1.4</text>
+ <line x1="70" y1="84.5" x2="790" y2="84.5" stroke="#232a38"/><text x="34" y="88">1.6</text>
+ <text x="8" y="210" transform="rotate(-90 18 210)">transfer gain</text>
+</g>
+<g fill="#9aa4bd" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">
+ <text x="70" y="374">0</text><text x="190" y="374">10</text><text x="310" y="374">20</text><text x="430" y="374">30</text><text x="550" y="374">40</text><text x="670" y="374">50</text><text x="790" y="374">60</text><text x="430" y="405">A→B delay (steps)</text>
+</g>
+<polyline fill="none" stroke="#6f9ceb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="70,221.4 106,248.9 142,271.1 178,265.1 214,240.1 250,213.2 286,159.5 322,106.2 358,77.0 394,125.1 430,166.5 466,184.1 502,193.4 538,205.3 574,221.2 610,242.6 646,270.2 682,303.8 718,325.6 754,331.2 790,326.0"/>
+<g fill="#6f9ceb" stroke="#0f1218" stroke-width="2">
+ <circle cx="70" cy="221.4" r="4"/><circle cx="106" cy="248.9" r="4"/><circle cx="142" cy="271.1" r="4"/><circle cx="178" cy="265.1" r="4"/><circle cx="214" cy="240.1" r="4"/><circle cx="250" cy="213.2" r="4"/><circle cx="286" cy="159.5" r="4"/><circle cx="322" cy="106.2" r="4"/><circle cx="358" cy="77.0" r="7"/><circle cx="394" cy="125.1" r="4"/><circle cx="430" cy="166.5" r="4"/><circle cx="466" cy="184.1" r="4"/><circle cx="502" cy="193.4" r="4"/><circle cx="538" cy="205.3" r="4"/><circle cx="574" cy="221.2" r="4"/><circle cx="610" cy="242.6" r="4"/><circle cx="646" cy="270.2" r="4"/><circle cx="682" cy="303.8" r="4"/><circle cx="718" cy="325.6" r="4"/><circle cx="754" cy="331.2" r="4"/><circle cx="790" cy="326.0" r="4"/>
+</g>
+<text x="374" y="76" fill="#6f9ceb" font-family="system-ui,sans-serif" font-size="14" font-weight="700">peak 1.624× @ delay 24</text>
+<text x="70" y="438" fill="#7f899f" font-family="system-ui,sans-serif" font-size="11">The gain is non-monotonic: a temporary local susceptibility, not a permanently stronger field.</text>
+</svg>
