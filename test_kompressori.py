@@ -8,6 +8,7 @@ import gate5_unbiased_scan as g5
 import gate6_lowrank_update as g6
 import gate7_update_composition as g7
 import gate8_operator_overlap as g8
+import gate9_patch_allocation as g9
 
 
 class KompressoriTests(unittest.TestCase):
@@ -115,6 +116,11 @@ class KompressoriTests(unittest.TestCase):
         self.assertAlmostEqual(metrics["operator_cosine"], 1.0, places=12)
         self.assertAlmostEqual(metrics["input_subspace_overlap"], 1.0, places=12)
         self.assertAlmostEqual(metrics["output_subspace_overlap"], 1.0, places=12)
+
+    def test_gate9_exact_distance_panels_have_expected_counts(self):
+        sites = g5.deterministic_a_locations(40, 30)
+        self.assertEqual(len(g9.candidate_pairs_at_distance(sites, 40, 58)), 41)
+        self.assertEqual(len(g9.candidate_pairs_at_distance(sites, 40, 122)), 50)
 
 
 if __name__ == "__main__":
