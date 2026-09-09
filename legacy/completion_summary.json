@@ -1,0 +1,34 @@
+{
+  "params": {
+    "dt": 0.08,
+    "damping": 0.001,
+    "base_c_sq": 1.0,
+    "tension_factor": 5.0,
+    "potential_lin": 1.0,
+    "potential_cub": 0.2,
+    "biharmonic_gamma": 0.02
+  },
+  "grid": 96,
+  "target_steps": 450,
+  "horizon": 70,
+  "seeds": 3,
+  "interpretation": {
+    "initial_only": "partial state supplied once, then free evolution",
+    "trajectory_clamp": "same spatial subset continuously synchronized to the reference",
+    "score": "computed only on hidden cells"
+  },
+  "cue_thresholds": {
+    "initial_only": {
+      "random": {"0.25": 0.10004340277777778, "0.5": 0.5, "0.75": null, "0.9": null},
+      "center": {"0.25": null, "0.5": null, "0.75": null, "0.9": null},
+      "boundary": {"0.25": 0.009982638888888888, "0.5": null, "0.75": null, "0.9": null},
+      "ring": {"0.25": 0.5, "0.5": null, "0.75": null, "0.9": null}
+    },
+    "trajectory_clamp": {
+      "random": {"0.25": 0.05002170138888889, "0.5": 0.25, "0.75": null, "0.9": null},
+      "center": {"0.25": null, "0.5": null, "0.75": null, "0.9": null},
+      "boundary": {"0.25": 0.009982638888888888, "0.5": null, "0.75": null, "0.9": null},
+      "ring": {"0.25": 0.5, "0.5": null, "0.75": null, "0.9": null}
+    }
+  }
+}
