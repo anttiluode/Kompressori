@@ -1,0 +1,155 @@
+{
+  "gate": "G8_operator_overlap_predicts_interference",
+  "claim_tested": "Pairwise overlap between independently measured low-rank local operator updates predicts their later nonlinear non-additivity, and retains predictive information among pairs at exactly the same physical distance.",
+  "result": "supported in this deterministic toy-field pair panel",
+  "grid": 40,
+  "target_steps": 350,
+  "delay": 24,
+  "horizon": 25,
+  "epsilon_a": 0.1,
+  "epsilon_b": 0.0005,
+  "response_directions": 100,
+  "energy_fraction": 0.95,
+  "a_sites": 30,
+  "pair_count": 34,
+  "pair_protocol": {
+    "extremes": "8 closest + 8 farthest by squared torus distance",
+    "intermediate_distance_squared": [58, 122, 232, 328, 458, 512],
+    "pairs_per_intermediate_level": 3,
+    "rule": "first lexicographic i,j pairs at each frozen distance; no outcome-based selection"
+  },
+  "correlations": {
+    "distance": {
+      "pearson_with_log10_nonadditivity": -0.9870753288692924,
+      "spearman_with_nonadditivity": -0.9807258173731959
+    },
+    "operator_cosine": {
+      "pearson_with_log10_nonadditivity": 0.9735081749180924,
+      "spearman_with_nonadditivity": 0.9630252100840334,
+      "within_exact_distance_pearson_log_residuals": 0.5843631752503866
+    },
+    "input_subspace_overlap": {
+      "pearson_with_log10_nonadditivity": 0.9795271661628716,
+      "spearman_with_nonadditivity": 0.9532467532467532,
+      "within_exact_distance_pearson_log_residuals": 0.06370790219981659
+    },
+    "output_subspace_overlap": {
+      "pearson_with_log10_nonadditivity": 0.9961367907996613,
+      "spearman_with_nonadditivity": 0.9456073338426279,
+      "within_exact_distance_pearson_log_residuals": 0.8732016590128927
+    },
+    "two_sided_overlap": {
+      "pearson_with_log10_nonadditivity": 0.9957604160404683,
+      "spearman_with_nonadditivity": 0.9630252100840334,
+      "within_exact_distance_pearson_log_residuals": 0.8370729771044695
+    }
+  },
+  "log10_nonadditivity_fits": {
+    "distance_only": {
+      "intercept": 2.66150928673407,
+      "slope": -0.4674675682411162,
+      "r2": 0.9743177048624224,
+      "rmse": 0.6604708715852321
+    },
+    "operator_cosine_only": {
+      "intercept": -0.26953739037988705,
+      "slope": 0.7516368741237544,
+      "r2": 0.9477181666323546,
+      "rmse": 0.942349830842513
+    },
+    "input_overlap_only": {
+      "intercept": 0.42325508508974075,
+      "slope": 1.6795501963244277,
+      "r2": 0.9594734692510659,
+      "rmse": 0.8296720628336026
+    },
+    "output_overlap_only": {
+      "intercept": -0.08154076753522094,
+      "slope": 0.36429175516784523,
+      "r2": 0.9922885059846486,
+      "rmse": 0.361914526867941
+    },
+    "two_sided_overlap_only": {
+      "intercept": -0.14165796935085367,
+      "slope": 0.35662561347042276,
+      "r2": 0.9915388061530865,
+      "rmse": 0.37909894436054603
+    }
+  },
+  "by_distance_squared": {
+    "32": {
+      "distance": 5.656854249492381,
+      "nonadditivity_mean": 0.6540378708711558,
+      "nonadditivity_min": 0.27647437171402467,
+      "nonadditivity_max": 1.2802943503053574,
+      "output_subspace_overlap_mean": 0.1351054218841532,
+      "two_sided_overlap_mean": 0.11722026957885955
+    },
+    "58": {
+      "distance": 7.615773105863909,
+      "nonadditivity_mean": 0.21474794900823468,
+      "nonadditivity_min": 0.1022092345952877,
+      "nonadditivity_max": 0.28736096951213175,
+      "output_subspace_overlap_mean": 0.127784785402408,
+      "two_sided_overlap_mean": 0.09813871608469034
+    },
+    "122": {
+      "distance": 11.045361017187261,
+      "nonadditivity_mean": 0.05310855273265185,
+      "nonadditivity_min": 0.0015738610166643574,
+      "nonadditivity_max": 0.1447093005783907,
+      "output_subspace_overlap_mean": 0.05516252097256949,
+      "two_sided_overlap_mean": 0.02670118029815537
+    },
+    "232": {
+      "distance": 15.231546211727817,
+      "nonadditivity_mean": 0.0009806150647599082,
+      "nonadditivity_min": 0.000013085496343377561,
+      "nonadditivity_max": 0.0028665812053663667,
+      "output_subspace_overlap_mean": 9.964976344505141e-8,
+      "two_sided_overlap_mean": 1.877319199346756e-8
+    },
+    "328": {
+      "distance": 18.110770276274835,
+      "nonadditivity_mean": 0.000006208425139290696,
+      "nonadditivity_min": 2.747146154264158e-7,
+      "nonadditivity_max": 0.000014288921389228055,
+      "output_subspace_overlap_mean": 2.7963517233427896e-13,
+      "two_sided_overlap_mean": 2.4938805097120894e-14
+    },
+    "458": {
+      "distance": 21.400934559032695,
+      "nonadditivity_mean": 1.2986312065498368e-8,
+      "nonadditivity_min": 8.517865889636487e-9,
+      "nonadditivity_max": 1.9171016597892988e-8,
+      "output_subspace_overlap_mean": 5.828180597846908e-23,
+      "two_sided_overlap_mean": 3.901236945941468e-21
+    },
+    "512": {
+      "distance": 22.627416997969522,
+      "nonadditivity_mean": 3.1113499111206244e-9,
+      "nonadditivity_min": 3.8600240502321293e-10,
+      "nonadditivity_max": 7.863820917118707e-9,
+      "output_subspace_overlap_mean": 2.5164406237581502e-24,
+      "two_sided_overlap_mean": 2.380984727121058e-23
+    },
+    "800": {
+      "distance": 28.284271247461902,
+      "nonadditivity_mean": 4.4763436827290823e-11,
+      "nonadditivity_min": 3.692559412600047e-11,
+      "nonadditivity_max": 6.207746437682905e-11,
+      "output_subspace_overlap_mean": 2.5563777052584284e-28,
+      "two_sided_overlap_mean": 1.2694783709088732e-29
+    }
+  },
+  "interpretation": "Distance remains an excellent predictor in this deliberately local field, but response-update overlap is not merely a relabeling of distance. Output-subspace overlap predicts log non-additivity better than a distance-only linear fit in this frozen panel (R^2 0.9923 versus 0.9743), and two-sided overlap remains strongly correlated with interference after subtracting the mean of each exact-distance group (r 0.8371). This suggests the portable hypothesis that physical separation protects edits because it separates the response-geometry patches they occupy.",
+  "limitations": [
+    "one deterministic PhiWorld-like field and one response basis",
+    "34 deliberately geometry-stratified pairs, not an independent random population",
+    "overlap and non-additivity share the same simulated operator measurement machinery",
+    "correlation is not a causal proof that subspace overlap creates the interaction",
+    "no adaptive learner or biological growth mechanism is implemented here"
+  ],
+  "note": "Running python gate8_operator_overlap.py regenerates this receipt and adds full per-pair details.",
+  "receipt_command": "python gate8_operator_overlap.py"
+}
