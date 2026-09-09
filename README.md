@@ -261,6 +261,92 @@ That is much closer to the learning problem that motivated the other repos than 
 
 ---
 
+## Gate 8 — distance is a proxy; operator-patch overlap predicts the collision
+
+Gate 7 still left an ambiguity: perhaps physical distance itself is the mechanism.
+Gate 8 measures each single-event low-rank `Delta J` first, then asks whether overlap
+between those independently measured response subspaces predicts the later joint
+non-additivity.
+
+The pair panel is frozen before outcomes are measured: the Gate-7 closest/farthest
+pairs plus three lexicographic pairs at each of six predeclared intermediate torus
+distances, for **34 deterministic pairs** total.
+
+The result is stronger than a near/far split:
+
+- distance alone predicts log non-additivity extremely well: **R² = 0.974**
+- 95%-energy **output-subspace overlap** predicts it even better in this panel: **R² = 0.992**
+- a two-sided input+output overlap score gives **R² = 0.992**
+- after subtracting the mean inside every *exact-distance* group, two-sided overlap
+  still correlates **r = 0.837** with the remaining log-interference variation
+- output-subspace overlap gives **r = 0.873** in that same-distance residual test
+
+So geometry looks increasingly like a proxy for a more portable object:
+
+```text
+physical locality
+      ↓
+local low-rank operator patches
+      ↓
+patch overlap
+      ↓
+nonlinear interference / composition
+```
+
+This is still one deterministic toy field, not a general law. But it finally gives
+the cross-repo program a positive mechanism candidate: **measure collision between
+operator edits before deciding whether to reuse, protect, or allocate structure.**
+
+See [the Gate 8 code](gate8_operator_overlap.py), [frozen receipt](results/gate8/receipt.json),
+and [operator-patch memory hypothesis](OPERATOR_PATCH_MEMORY.md).
+
+---
+
+## Gate 9 — the overlap sketch can choose a safer pairing at the same distance
+
+Gate 8 found a predictor. Gate 9 asks whether it can actually make a decision before
+the joint interaction is observed.
+
+The tested score—95%-energy output-subspace overlap—is fixed from Gate 8. At two
+**exact** torus distances (`distance² = 58` and `122`), Gate 9 excludes the three
+lexicographic pairs already used in Gate 8, ranks every remaining candidate using
+only its two single-event `Delta J` sketches, selects the five lowest-overlap and
+five highest-overlap candidates, and only then measures their joint non-additivity.
+
+At `distance² = 58` (`distance ≈ 7.62`):
+
+- five low-overlap choices: mean non-additivity **0.154**
+- five high-overlap choices: mean **0.368**
+- high / low ratio: **2.38×**
+
+At `distance² = 122` (`distance ≈ 11.05`):
+
+- five low-overlap choices: mean non-additivity **0.00215**
+- five high-overlap choices: mean **0.0798**
+- high / low ratio: **37.2×**
+- every high-overlap choice interfered more than every low-overlap choice
+
+That is the first **allocation-style positive result** in the repo:
+
+```text
+same physical distance
+        +
+single-event patch sketches only
+        ↓
+choose low-overlap pairing
+        ↓
+less later nonlinear interference
+```
+
+It is still not a learning result: the choices are field locations, the metric was
+discovered on Gate 8, and there are only two fixed-distance panels. But this is the
+mechanism we were missing. The next adaptive system should use the collision score
+to decide where a useful learned edit goes.
+
+See [Gate 9 code](gate9_patch_allocation.py) and [frozen receipt](results/gate9/receipt.json).
+
+---
+
 ## Why the old PhiWorld picture still belongs here
 
 The predecessor probe tried one-shot partial initial states and continuous sparse trajectory clamping, scoring only hidden cells. Distributed random samples helped more than compact center/ring cues, but no supplied mask reached 0.75 mean hidden correlation.
@@ -278,6 +364,10 @@ What is compressible?
                 ↓ the operator update
 When do updates interfere?
                 ↓ when they overlap
+What predicts the overlap cost?
+                ↓ the operator patches themselves
+Can the patch predict where to place the next edit?
+                ↓ yes, in a first fixed-distance allocation test
 ```
 
 ---
@@ -305,6 +395,8 @@ python gate4_kernel.py
 python gate5_unbiased_scan.py
 python gate6_lowrank_update.py --a-count 30
 python gate7_update_composition.py
+python gate8_operator_overlap.py
+python gate9_patch_allocation.py
 ```
 
 The long deterministic Gate 5 run writes its full `events.csv` locally as well as the JSON receipt and SVG summary.
@@ -319,6 +411,9 @@ The long deterministic Gate 5 run writes its full `events.csv` locally as well a
 - `gate5_unbiased_scan.py` — G5 deterministic prevalence/locality scan
 - `gate6_lowrank_update.py` — G6 generalized operator/update spectra
 - `gate7_update_composition.py` — G7 spatial composition/interference
+- `gate8_operator_overlap.py` — G8 low-rank patch-overlap predictor
+- `gate9_patch_allocation.py` — G9 fixed-distance overlap-guided allocation
+- `OPERATOR_PATCH_MEMORY.md` — cross-repo positive mechanism and adaptive test
 - `results/gate*/receipt.json` — machine-readable receipts
 - `results/gate*/summary.svg` — static visuals where applicable
 - `legacy/` — predecessor PhiWorld completion experiment
@@ -327,9 +422,10 @@ The long deterministic Gate 5 run writes its full `events.csv` locally as well a
 
 ## Next gates
 
-- **G8 — update basis prediction:** can a few learned / measured low-rank update components predict `Delta J` at unseen A locations?
-- **G9 — structural overlap:** replace geometric distance with overlap in the induced low-rank subspaces. Does subspace overlap predict interference better than Euclidean distance?
-- **G10 — slow substrate:** make operator updates persistent and test when additive local memories remain independent versus collapse into interference.
-- **G11 — learning guard:** move the result into an adaptive model: protect old outputs versus protect low-rank response updates and their overlap.
+- **G10 — adaptive allocation:** give a learner multiple places to realize the same useful edit; choose by predicted patch collision and compare with random, distance-only and answer-error allocation at matched task progress.
+- **G11 — bounded patch acquisition:** estimate a useful `Delta J` sketch from a small probe budget instead of the full 100-direction panel, then test whether allocation still works on unseen collisions.
+- **G12 — structural growth:** when every existing place collides with protected patches, allocate a new route. Compare with the same final capacity present from the beginning.
+- **G13 — link versus split:** deliberately reuse overlap for related experiences and separate conflicting ones. Test transfer/co-recall against interference in one protocol.
+- **IttnasNoruen handoff:** spend a fixed replay budget on old cue routes whose response-geometry patches are predicted to collide with the proposed new edit.
 
 The repo succeeds if these gates kill the seductive story quickly or turn it into a measurable mechanism.

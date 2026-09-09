@@ -7,6 +7,8 @@ import gate3_transfer as g3
 import gate5_unbiased_scan as g5
 import gate6_lowrank_update as g6
 import gate7_update_composition as g7
+import gate8_operator_overlap as g8
+import gate9_patch_allocation as g9
 
 
 class KompressoriTests(unittest.TestCase):
@@ -91,6 +93,34 @@ class KompressoriTests(unittest.TestCase):
 
     def test_gate7_torus_distance_wraps(self):
         self.assertAlmostEqual(g7.torus_distance((1, 1), (39, 1), 40), 2.0)
+
+    def test_gate8_pair_protocol_is_geometry_only_and_deterministic(self):
+        sites = g5.deterministic_a_locations(40, 30)
+        a = g8.selected_pairs(sites, 40)
+        b = g8.selected_pairs(sites, 40)
+        self.assertEqual(a, b)
+        self.assertEqual(len(a), 34)
+        counts = {}
+        for d2, _, _, _ in a:
+            counts[d2] = counts.get(d2, 0) + 1
+        self.assertEqual(counts[32], 8)
+        self.assertEqual(counts[800], 8)
+        for d2 in g8.INTERMEDIATE_DISTANCE_SQUARED:
+            self.assertEqual(counts[d2], 3)
+
+    def test_gate8_identical_low_rank_views_have_unit_subspace_overlap(self):
+        rng = np.random.default_rng(8)
+        delta = rng.normal(size=(20, 4))
+        view = g8.low_rank_view(delta, np.eye(4), energy_fraction=.999999)
+        metrics = g8.overlap_metrics(view, view)
+        self.assertAlmostEqual(metrics["operator_cosine"], 1.0, places=12)
+        self.assertAlmostEqual(metrics["input_subspace_overlap"], 1.0, places=12)
+        self.assertAlmostEqual(metrics["output_subspace_overlap"], 1.0, places=12)
+
+    def test_gate9_exact_distance_panels_have_expected_counts(self):
+        sites = g5.deterministic_a_locations(40, 30)
+        self.assertEqual(len(g9.candidate_pairs_at_distance(sites, 40, 58)), 41)
+        self.assertEqual(len(g9.candidate_pairs_at_distance(sites, 40, 122)), 50)
 
 
 if __name__ == "__main__":

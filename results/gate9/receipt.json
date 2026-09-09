@@ -1,0 +1,77 @@
+{
+  "gate": "G9_patch_overlap_guided_allocation",
+  "claim_tested": "At exactly matched physical distance, a selector using only independently measured single-event operator-patch overlap can choose pairings that later show less nonlinear interference than high-overlap pairings.",
+  "result": "supported in the two frozen exact-distance follow-up panels",
+  "metric_selection_note": "Output-subspace overlap was selected after Gate 8 established it as the strongest tested predictor. Gate 9 is therefore a follow-up allocation test, not an independent discovery of the metric.",
+  "joint_outcome_holdout": "The three Gate-8 lexicographic pairs at each tested distance are excluded. All remaining candidates are ranked from single-event operators before any selected pair's joint non-additivity is measured.",
+  "grid": 40,
+  "target_steps": 350,
+  "delay": 24,
+  "horizon": 25,
+  "epsilon_a": 0.1,
+  "epsilon_b": 0.0005,
+  "response_directions": 100,
+  "energy_fraction": 0.95,
+  "test_distance_squared": [58, 122],
+  "tests": {
+    "58": {
+      "distance": 7.615773105863909,
+      "candidate_pairs_total": 41,
+      "gate8_pairs_excluded": 3,
+      "remaining_candidates_ranked_without_joint_outcomes": 38,
+      "selected_per_group": 5,
+      "low_overlap": {
+        "output_subspace_overlap_mean": 0.00027456813774285856,
+        "relative_nonadditivity_mean": 0.15442207619750303,
+        "relative_nonadditivity_median": 0.13955564048785596,
+        "relative_nonadditivity_min": 0.06068148123591951,
+        "relative_nonadditivity_max": 0.32571921825870076,
+        "cosine_actual_vs_sum_mean": 0.9843602055677756
+      },
+      "high_overlap": {
+        "output_subspace_overlap_mean": 0.20053374613732694,
+        "relative_nonadditivity_mean": 0.3679318061006788,
+        "relative_nonadditivity_median": 0.28736096951394474,
+        "relative_nonadditivity_min": 0.2592889505241741,
+        "relative_nonadditivity_max": 0.5028240704778343,
+        "cosine_actual_vs_sum_mean": 0.9282598117777237
+      },
+      "high_over_low_mean_nonadditivity_ratio": 2.382637347979318,
+      "complete_nonadditivity_separation": false
+    },
+    "122": {
+      "distance": 11.045361017187261,
+      "candidate_pairs_total": 50,
+      "gate8_pairs_excluded": 3,
+      "remaining_candidates_ranked_without_joint_outcomes": 47,
+      "selected_per_group": 5,
+      "low_overlap": {
+        "output_subspace_overlap_mean": 4.453134865979379e-9,
+        "relative_nonadditivity_mean": 0.002145804932470789,
+        "relative_nonadditivity_median": 0.0017190084700204466,
+        "relative_nonadditivity_min": 0.0017190084697909084,
+        "relative_nonadditivity_max": 0.0027859996263888552,
+        "cosine_actual_vs_sum_mean": 0.9999976386432181
+      },
+      "high_overlap": {
+        "output_subspace_overlap_mean": 0.06132332191105675,
+        "relative_nonadditivity_mean": 0.07981185751561715,
+        "relative_nonadditivity_median": 0.08336919043426519,
+        "relative_nonadditivity_min": 0.04380580306456301,
+        "relative_nonadditivity_max": 0.14470930057978448,
+        "cosine_actual_vs_sum_mean": 0.9966980959069988
+      },
+      "high_over_low_mean_nonadditivity_ratio": 37.19436762768446,
+      "complete_nonadditivity_separation": true
+    }
+  },
+  "interpretation": "This is the first allocation-style result in Kompressori. Physical distance is held exactly fixed, yet the low-rank response sketch can choose pairings with substantially different later interaction. At squared distance 122 the five high-overlap held-out choices have about 37 times the mean non-additivity of the five low-overlap choices, with complete separation between groups. At squared distance 58 the mean ratio is about 2.38 in the same direction. This still does not show a learning advantage; the next step is adaptive structural placement at matched task progress and capacity.",
+  "limitations": [
+    "same toy field and operator basis as Gate 8",
+    "the overlap metric was selected using Gate-8 evidence",
+    "only two exact distances and five selected candidates per group",
+    "candidate allocation is between field locations, not yet learned network structure"
+  ],
+  "note": "Running python gate9_patch_allocation.py regenerates the receipt with full selected-pair details.",
+  "receipt_command": "python gate9_patch_allocation.py"
+}
