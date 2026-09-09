@@ -4,7 +4,7 @@
 
 **Compress the state. Then ask whether you also compressed the future operator.**
 
-Kompressori starts from the old PhiWorld-style nonlinear field, but the goal is no longer to make a "hologram" claim. The first question is narrower:
+Kompressori starts from the old PhiWorld-style nonlinear field, but the goal is no longer to make a "hologram" claim. The question became narrower and, so far, more productive:
 
 > A partial state can preserve part of the visible future while failing to preserve how the system responds to the *next* perturbation.
 
@@ -20,8 +20,6 @@ Two measurements are made on hidden cells over a 50-step future:
 2. **response correlation** — after applying the same tiny Gaussian displacement to full and compressed states, do their *changes* follow the same trajectory?
 
 The second is a finite-difference tangent-response test. The probe is small enough to be close to linear: halving it and doubling its response disagrees with the full probe by at most **0.043 relative error** across the three default probe seeds.
-
-### The first interesting failure
 
 At a **5% square-edge-shaped cue**:
 
@@ -52,25 +50,72 @@ Result:
 
 So, in this toy search, **future/replay fidelity is almost no guide to perturbation-response fidelity**. This is not a universal theorem and not evidence about brains. It is a concrete counterexample to a tempting engineering assumption: choosing a compressed state because it reproduces known trajectories can leave the local future operator badly wrong.
 
-The full receipt is in `results/gate1/receipt.json`. The exact long run was:
+## Gate 2 — checking a few perturbations does not certify the operator
 
-```bash
-python gate1_search.py --horizon 50 --candidates 200 --probe-seeds 5
+The obvious repair to Gate 1 is: *fine, then guard the response too.* Gate 2 attacks that repair.
+
+At a fixed **5%** observation budget we generated 140 random masks and kept the top quarter by future fidelity. In each of six cross-validation splits, four localized perturbations were used to select the response-aware mask and four different perturbations were held out.
+
+The response-aware selector genuinely learned its training probes:
+
+- training response correlation: `0.050 → 0.177`
+- training relative response error: `2.161 → 1.826` (lower is better)
+
+But the improvement did **not** transfer to unseen perturbation directions:
+
+- held-out response correlation: `0.108 → 0.076`
+- held-out relative response error: `2.035 → 2.131`
+
+So at this sparse state-only budget, a small perturbation test suite can itself be overfit. The guard can preserve the answers to the probes without preserving the local future operator that generated them.
+
+That changes the engineering question again:
+
+```text
+replay old outputs        -- not enough
+probe a few responses     -- still not enough here
+preserve / constrain the response geometry itself ?
 ```
 
-The script defaults are smaller for quicker iteration.
+The exact receipt is `results/gate2/receipt.json`.
+
+## Gate 3 — a finite perturbation can prepare the next perturbation
+
+This was the experiment we actually wanted from the Euler-inspired parent→child thought.
+
+Apply packet **A**, wait 20 steps, then apply a much smaller packet **B**. Subtract the A-only future so that we isolate B's response. Define
+
+```text
+transfer gain = || response to B after A || / || response to B without A ||
+```
+
+At tiny `εA = 0.002`, a 300-pair search stayed essentially in the linear-superposition regime: the **maximum** transfer gain was only **1.00029**.
+
+At finite `εA = 0.1`, most pairs were still near 1 — but one nearby pair produced:
+
+- transfer gain: **1.46637×**
+- response correlation with the unprepared B response: **0.886**
+- A/B packet-center distance: **2.38 cells** on the periodic grid
+- change in the delayed state caused by A: **5.08%** in relative norm
+
+![Gate 3 amplitude sweep](results/gate3/amplitude_sweep.svg)
+
+For that discovered pair, increasing A first **suppresses** B (`gain=0.929` at `εA=0.03`), then flips into amplification (`1.255` at `0.07`, `1.466` at `0.10`). This is not just a large-B artifact: varying B from `0.0005` to `0.008` leaves the measured transfer gain around **1.45–1.47×**.
+
+The effect is also strongly local in this search. For A/B separations above 15 cells, the largest gain among 168 tested pairs was only about `1.00000047`; the large amplifiers appeared in the `<5 cell` bin.
+
+This is the first result here that resembles the abstract **parent → changes geometry → child sees a different amplifier** idea. But the qualification matters: pair 49 was deliberately selected as the maximum-gain example out of 300. Gate 3 is therefore an **existence demonstration in this toy field**, not evidence that amplification is common, not fluid blowup, and not a brain mechanism.
 
 ## Why the old PhiWorld result belongs here
 
-The predecessor probe already tested partial-field completion in two modes: one-shot partial initial state and continuous trajectory clamping. It explicitly measured only hidden cells. The old result did **not** show a holographic reconstruction attractor: distributed random samples helped more than compact center/ring cues, but even 50% random observation only reached modest hidden correlation, and no mask reached 0.75 mean correlation in the supplied run.
+The predecessor probe tested partial-field completion in two modes: one-shot partial initial state and continuous trajectory clamping. It explicitly measured only hidden cells. The old result did **not** show a holographic reconstruction attractor: distributed random samples helped more than compact center/ring cues, but even 50% random observation only reached modest hidden correlation, and no mask reached 0.75 mean correlation in the supplied run.
 
-Kompressori keeps that negative result as the baseline and adds the missing question: **did the compressed state retain the response geometry?**
+Kompressori keeps that negative result as the baseline and asks the missing second question: **did the compressed state retain the response geometry?**
 
 A detail worth making explicit: the simulation Laplacian uses `np.roll`, so the domain is periodic. The `edge` mask is a square-shaped observation geometry; it is **not a physical boundary condition**.
 
 ## Euler / Navier–Stokes inspiration, without overclaiming
 
-OpenAI's September 2026 release proposes finite-time blowup results for Navier–Stokes and Euler and supplies Lean formalizations. The conceptual prompt we borrow is not "PhiWorld is a fluid". It is the more general idea that perturbations can be transformed by the current state into finite-time response geometries with very different amplification properties.
+OpenAI's September 2026 release proposes finite-time blowup results for Navier–Stokes and Euler and supplies Lean formalizations. The conceptual prompt we borrow is not "PhiWorld is a fluid". It is the more general idea that perturbations can be transformed by the current state into finite-time response geometries with different amplification properties.
 
 For Kompressori the operational translation is:
 
@@ -79,7 +124,9 @@ preserve state / answers
         ↓
 not enough
         ↓
-preserve finite-time response geometry too
+preserve finite-time response geometry
+        ↓
+and ask whether one event can reshape it for the next event
 ```
 
 Official sources:
@@ -93,16 +140,29 @@ Official sources:
 python -m pip install numpy
 python kompressori.py
 python gate1_search.py
+python gate2_crossvalidate.py
+python gate3_transfer.py
 ```
 
-Gate 0 writes `results/gate0/receipt.json`; Gate 1 writes `results/gate1/receipt.json`.
+The longer supplied receipts used:
+
+```bash
+python gate1_search.py --horizon 50 --candidates 200 --probe-seeds 5
+python gate2_crossvalidate.py --grid 36 --horizon 25 --candidates 140 --probes 8 --splits 6
+python gate3_transfer.py --grid 40 --delay 20 --horizon 25 --pairs 300 --small-a .002 --search-a .1 --epsilon-b .002
+```
 
 ## Repo map
 
 - `kompressori.py` — Gate 0 future-vs-response experiment
 - `gate1_search.py` — future-only mask search, followed by unseen response tests
+- `gate2_crossvalidate.py` — response-aware guard with held-out perturbation directions
+- `gate3_transfer.py` — A→B perturbation-transfer search
 - `results/gate0/receipt.json` — Gate 0 receipt
 - `results/gate1/receipt.json` — Gate 1 receipt
+- `results/gate2/receipt.json` — Gate 2 receipt
+- `results/gate3/receipt.json` — Gate 3 receipt
+- `results/gate3/amplitude_sweep.svg` — Gate 3 visual
 - `legacy/phiworld_completion_probe.py` — predecessor experiment
 - `legacy/completion_summary.json` — predecessor receipt supplied with the experiment
 - `index.html` — dependency-free visual summary for GitHub Pages
@@ -110,9 +170,9 @@ Gate 0 writes `results/gate0/receipt.json`; Gate 1 writes `results/gate1/receipt
 
 ## Next gates
 
-- **G2 — response-aware compressor:** optimize a combined objective over state and tangent response. Does the selected mask become spatially distributed, multiscale, ring-like, or something stranger?
-- **G3 — perturbation transfer:** ask whether perturbation A changes the field so perturbation B is amplified more strongly later — the toy parent→child cascade idea.
-- **G4 — slow substrate:** let the response geometry itself change slowly and ask which compressed constraints prevent runaway self-amplification.
-- **G5 — learning guard:** move the same distinction into an adaptive model: preserve stored answers versus preserve the Jacobian/impulse responses around them.
+- **G4 — transfer map:** map `A location × delay × B location` instead of post-selecting one pair. Is the transfer kernel wave-like, advective, ring-like, or tied to PhiWorld's existing structures?
+- **G5 — operator compression:** stop asking a sparse state mask to do the impossible. Compare state-only compression with a small tangent/impulse sketch. How many response directions must be retained before held-out perturbations become predictable?
+- **G6 — slow substrate:** let response geometry itself change slowly and ask which constraints prevent a local A→B amplifier from becoming runaway self-amplification.
+- **G7 — learning guard:** move the distinction into an adaptive model: preserve stored answers versus preserve nearby impulse/Jacobian responses around them.
 
 The repo succeeds if these gates kill the seductive story quickly or turn it into a measurable mechanism.
