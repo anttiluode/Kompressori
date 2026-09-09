@@ -9,7 +9,7 @@ main{max-width:1120px;margin:auto;padding:48px 20px 72px} h1{font-size:clamp(2.5
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin:30px 0}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}.big{font-size:2.6rem;font-weight:750}.small{color:var(--muted)}
 canvas{width:100%;height:360px;background:#0f1218;border-radius:14px} code{color:#ffd979}.badge{display:inline-block;border:1px solid #49546b;border-radius:999px;padding:5px 10px;color:#c9d2e8;margin:0 6px 6px 0}a{color:#9cc8ff}.gate{margin:52px 0}.sweep{width:100%;display:block;border-radius:18px;border:1px solid var(--line);background:#0f1218}.arrow{font-size:1.15rem;color:#cbd3e6}.warn{border-left:3px solid var(--accent);padding-left:14px;color:#cbd3e6}footer{margin-top:48px;color:var(--muted)}
 </style></head><body><main>
-<span class="badge">PhiWorld descendant</span><span class="badge">G0–G3</span><span class="badge">reproducible receipts</span>
+<span class="badge">PhiWorld descendant</span><span class="badge">G0–G4</span><span class="badge">reproducible receipts</span>
 <h1>Compress the state.<br>Did you compress its <em>response?</em></h1>
 <p class="lead">Kompressori began with an old partial-field / “hologram?” experiment. The more useful question turned out to be different: can a compressed state reproduce the visible future while becoming a different machine when the next perturbation arrives?</p>
 <img class="heroimg" src="legacy/example_reconstructions.png" alt="Legacy PhiWorld partial-field reconstruction examples">
@@ -63,12 +63,26 @@ canvas{width:100%;height:360px;background:#0f1218;border-radius:14px} code{color
 </section>
 
 <section class="gate">
+<span class="badge">Gate 4</span>
+<h2>The amplifier is a local susceptibility window</h2>
+<p>Gate 4 characterizes the post-selected Gate 3 pair instead of pretending it is independent evidence. We sweep the A→B delay, then at the peak delay scan B over 400 positions.</p>
+<div class="grid">
+ <div class="card"><div class="small">fixed pair peak</div><div class="big">1.624×</div><div>transfer gain at delay 24</div></div>
+ <div class="card"><div class="small">spatial scan maximum</div><div class="big">1.647×</div><div>near B=(16,32)</div></div>
+ <div class="card"><div class="small">strong hotspot area</div><div class="big">13 / 400</div><div>positions above gain 1.1</div></div>
+</div>
+<img class="sweep" src="results/gate4/delay_sweep.svg" alt="Gate 4 transfer gain across A to B delay">
+<p>The same interaction is slightly suppressive at some delays, strongly amplifying around steps 18–30, and suppressive again later. At the peak delay, the mean gain over the whole B-position map is only <strong>1.011×</strong>; only three of 400 positions exceed 1.4×, and the maximum sits just 2.13 cells from A.</p>
+<p class="warn">So the present toy result is not a globally growing mode. It looks more like a <strong>temporary local pocket of altered response geometry</strong>: a nearby event arriving in the right time window sees a different machine.</p>
+</section>
+
+<section class="gate">
 <h2>Where this now points</h2>
 <div class="card">
-<p><code>G4</code> map A location × delay × B location instead of post-selecting one pair.</p>
-<p><code>G5</code> compare state-only compression with a small tangent / impulse sketch.</p>
-<p><code>G6</code> let response geometry change slowly and test when local transfer becomes runaway amplification.</p>
-<p><code>G7</code> move the same distinction into learning: preserve stored answers versus preserve nearby response geometry.</p>
+<p><code>G5</code> independent coarse A×B×delay scan: how common are these windows when pair 49 is no longer privileged?</p>
+<p><code>G6</code> compare state-only compression with a small tangent / impulse sketch.</p>
+<p><code>G7</code> let response geometry change slowly and test when local transfer becomes runaway amplification.</p>
+<p><code>G8</code> move the distinction into learning: preserve stored answers versus preserve nearby response geometry.</p>
 </div>
 </section>
 <footer>Source, scripts, and machine-readable receipts live in this repository. No holographic-principle, fluid/brain-equivalence, or Navier–Stokes claim is being made.</footer>
