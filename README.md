@@ -1,5 +1,7 @@
 # Kompressori
 
+[pic](/legacy/example_reconstructions.png)
+
 **Compress the state. Then ask whether you also compressed the future operator.**
 
 Kompressori starts from the old PhiWorld-style nonlinear field, but the goal is no longer to make a "hologram" claim. The first question is narrower:
