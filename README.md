@@ -2,7 +2,7 @@
 
 **Compress the state. Then ask whether you also compressed the future operator.**
 
-Kompressori starts from the old PhiWorld-style nonlinear field, but the goal is no longer to make a "hologram" claim. The first experiment asks a narrower question that came out of the recent Euler/Navier–Stokes discussion:
+Kompressori starts from the old PhiWorld-style nonlinear field, but the goal is no longer to make a "hologram" claim. The first question is narrower:
 
 > A partial state can preserve part of the visible future while failing to preserve how the system responds to the *next* perturbation.
 
@@ -10,14 +10,14 @@ That distinction matters for any adaptive system. A memory guard, compressed wor
 
 ## Gate 0 — future fidelity is not response fidelity
 
-We evolve the PhiWorld-like field to a structured state `s=(phi, phi_old)`. We then keep only a fraction of the cells and zero the hidden state.
+We evolve the PhiWorld-like field to a structured state `s=(phi, phi_old)`, retain only a fraction of the cells, and zero the hidden state.
 
-Two measurements are made on the hidden cells over a 50-step future:
+Two measurements are made on hidden cells over a 50-step future:
 
 1. **future correlation** — does the compressed state follow the same future trajectory?
-2. **response correlation** — after applying the same tiny Gaussian displacement to the full and compressed states, do their *changes* follow the same trajectory?
+2. **response correlation** — after applying the same tiny Gaussian displacement to full and compressed states, do their *changes* follow the same trajectory?
 
-The second is a finite-difference tangent-response test. It is intentionally small enough to be close to linear: in the default receipt, halving the probe and doubling its response disagrees with the full probe by at most **0.043 relative error** across the three probe seeds.
+The second is a finite-difference tangent-response test. The probe is small enough to be close to linear: halving it and doubling its response disagrees with the full probe by at most **0.043 relative error** across the three default probe seeds.
 
 ### The first interesting failure
 
@@ -27,9 +27,7 @@ At a **5% square-edge-shaped cue**:
 - response correlation: **0.004**
 - response gain ratio: **4.389** (`1.0` would match the full state's response magnitude)
 
-So this cue retains a nontrivial resemblance to the future while the response to the next perturbation is essentially unrelated and about 4.4× too large.
-
-That is the point of Kompressori:
+So the cue retains a nontrivial resemblance to the future while its response to the next perturbation is essentially unrelated and about 4.4× too large.
 
 ```text
 looks similar later
@@ -37,19 +35,40 @@ looks similar later
 has the same future sensitivity
 ```
 
-At **25% random** observation the two correlations become much closer (`future=0.517`, `response=0.481`), though the response is still amplified (`gain=1.434`). At **50% energy-selected** cells the future correlation reaches `0.665` and response correlation `0.516`, with gain `0.827`. None of these is yet "strong completion." That negative result is useful.
+At **25% random** observation the two correlations become closer (`future=0.517`, `response=0.481`), though the response is still amplified (`gain=1.434`). At **50% energy-selected** cells the future correlation reaches `0.665` and response correlation `0.516`, with gain `0.827`. None is yet strong completion.
+
+## Gate 1 — optimizing the future does not recover the response
+
+Gate 1 fixes the observation budget at **5%**, generates **200 random masks**, and ranks them using **only future trajectory correlation**. It then surprises every compressed state with five perturbation packets that were not used for selection.
+
+Result:
+
+- Pearson correlation between future fidelity and response fidelity across the 200 masks: **0.026**
+- best future-only mask: future `0.344`, unseen response `0.070`, response gain `3.293`
+- best response-preserving mask: future `0.296`, unseen response `0.340`, response gain `2.693`
+- the response-best mask ranked only **71st** by future fidelity
+
+So, in this toy search, **future/replay fidelity is almost no guide to perturbation-response fidelity**. This is not a universal theorem and not evidence about brains. It is a concrete counterexample to a tempting engineering assumption: choosing a compressed state because it reproduces known trajectories can leave the local future operator badly wrong.
+
+The full receipt is in `results/gate1/receipt.json`. The exact long run was:
+
+```bash
+python gate1_search.py --horizon 50 --candidates 200 --probe-seeds 5
+```
+
+The script defaults are smaller for quicker iteration.
 
 ## Why the old PhiWorld result belongs here
 
-The predecessor probe already tested partial-field completion in two modes: one-shot partial initial state and continuous trajectory clamping. It explicitly measured only the hidden cells. The old result did **not** show a holographic reconstruction attractor: distributed random samples helped more than compact center/ring cues, but even 50% random observation only reached modest hidden correlation, and no mask reached 0.75 mean correlation in the supplied run.
+The predecessor probe already tested partial-field completion in two modes: one-shot partial initial state and continuous trajectory clamping. It explicitly measured only hidden cells. The old result did **not** show a holographic reconstruction attractor: distributed random samples helped more than compact center/ring cues, but even 50% random observation only reached modest hidden correlation, and no mask reached 0.75 mean correlation in the supplied run.
 
-Kompressori keeps that result as the baseline and adds the missing question: **did the compressed state retain the response geometry?**
+Kompressori keeps that negative result as the baseline and adds the missing question: **did the compressed state retain the response geometry?**
 
-A detail worth making explicit: the simulation Laplacian uses `np.roll`, so the domain is periodic. The `edge` mask is just a square-shaped observation geometry; it is **not a physical boundary condition**.
+A detail worth making explicit: the simulation Laplacian uses `np.roll`, so the domain is periodic. The `edge` mask is a square-shaped observation geometry; it is **not a physical boundary condition**.
 
 ## Euler / Navier–Stokes inspiration, without overclaiming
 
-OpenAI's September 2026 release proposes finite-time blowup results for Navier–Stokes and Euler and supplies Lean formalizations. The conceptual prompt we borrow is not "PhiWorld is a fluid". It is the more general idea that a perturbation can be transformed by the current state into a future geometry with very different amplification properties.
+OpenAI's September 2026 release proposes finite-time blowup results for Navier–Stokes and Euler and supplies Lean formalizations. The conceptual prompt we borrow is not "PhiWorld is a fluid". It is the more general idea that perturbations can be transformed by the current state into finite-time response geometries with very different amplification properties.
 
 For Kompressori the operational translation is:
 
@@ -71,22 +90,17 @@ Official sources:
 ```bash
 python -m pip install numpy
 python kompressori.py
+python gate1_search.py
 ```
 
-Outputs:
-
-```text
-results/gate0/runs.csv
-results/gate0/receipt.json
-```
-
-The default run is small: 64×64 grid, 350 settling steps, 50-step evaluation horizon, 5 mask geometries, 6 observation fractions, 3 probe seeds.
+Gate 0 writes `results/gate0/receipt.json`; Gate 1 writes `results/gate1/receipt.json`.
 
 ## Repo map
 
-- `kompressori.py` — Gate 0 experiment
-- `results/gate0/receipt.json` — compact machine-readable receipt
-- `results/gate0/runs.csv` — every run
+- `kompressori.py` — Gate 0 future-vs-response experiment
+- `gate1_search.py` — future-only mask search, followed by unseen response tests
+- `results/gate0/receipt.json` — Gate 0 receipt
+- `results/gate1/receipt.json` — Gate 1 receipt
 - `legacy/phiworld_completion_probe.py` — predecessor experiment
 - `legacy/completion_summary.json` — predecessor receipt supplied with the experiment
 - `index.html` — dependency-free visual summary for GitHub Pages
@@ -94,11 +108,9 @@ The default run is small: 64×64 grid, 350 settling steps, 50-step evaluation ho
 
 ## Next gates
 
-G0 gives us a clean target rather than a grand claim. The next experiments should attack it.
+- **G2 — response-aware compressor:** optimize a combined objective over state and tangent response. Does the selected mask become spatially distributed, multiscale, ring-like, or something stranger?
+- **G3 — perturbation transfer:** ask whether perturbation A changes the field so perturbation B is amplified more strongly later — the toy parent→child cascade idea.
+- **G4 — slow substrate:** let the response geometry itself change slowly and ask which compressed constraints prevent runaway self-amplification.
+- **G5 — learning guard:** move the same distinction into an adaptive model: preserve stored answers versus preserve the Jacobian/impulse responses around them.
 
-- **G1 — learned compressor:** choose the observed cells to maximize future fidelity, then test whether response fidelity was accidentally destroyed.
-- **G2 — response-aware compressor:** optimize a combined objective over state and tangent response. Does the chosen mask become spatially distributed, multiscale, ring-like, or something stranger?
-- **G3 — perturbation transfer:** ask whether one perturbation changes the field so another perturbation is amplified more strongly later — the toy parent→child cascade idea.
-- **G4 — slow substrate:** allow the response geometry itself to change slowly and ask which compressed constraints prevent runaway self-amplification.
-
-The repo succeeds if those gates kill the seductive story quickly or turn it into a measurable mechanism.
+The repo succeeds if these gates kill the seductive story quickly or turn it into a measurable mechanism.
