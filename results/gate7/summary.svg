@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420">
+<rect width="100%" height="100%" fill="#0f1218"/>
+<style>text{font-family:system-ui,sans-serif;fill:#e5ecfa}.muted{fill:#98a4ba}.box{fill:#171c25;stroke:#303949}.big{font-size:54px;font-weight:750}</style>
+<text x="35" y="42" font-size="24" font-weight="700">Gate 7 — separated updates add; overlapping updates interact</text>
+<text x="35" y="68" class="muted" font-size="14">pairs chosen only by torus distance, not by outcome</text>
+<rect class="box" x="45" y="105" width="285" height="225" rx="18"/>
+<text x="70" y="140" class="muted" font-size="15">8 farthest pairs</text>
+<text x="70" y="200" class="big">4.5e-11</text>
+<text x="70" y="230" font-size="15">mean non-additivity error</text>
+<text x="70" y="275" font-size="24">cos ≈ 1.000000</text>
+<text x="70" y="305" class="muted" font-size="13">distance ≈ 28.28 cells</text>
+<rect class="box" x="357" y="105" width="285" height="225" rx="18"/>
+<text x="382" y="140" class="muted" font-size="15">8 closest pairs, finite A</text>
+<text x="382" y="200" class="big">0.654</text>
+<text x="382" y="230" font-size="15">mean non-additivity error</text>
+<text x="382" y="275" font-size="24">cos ≈ 0.802</text>
+<text x="382" y="305" class="muted" font-size="13">distance ≈ 5.66 cells</text>
+<rect class="box" x="670" y="105" width="285" height="225" rx="18"/>
+<text x="695" y="140" class="muted" font-size="15">same near geometry, tiny A</text>
+<text x="695" y="200" class="big">0.019</text>
+<text x="695" y="230" font-size="15">mean non-additivity error</text>
+<text x="695" y="275" font-size="20">returns toward superposition</text>
+<text x="35" y="382" class="muted" font-size="14">Toy interpretation: low-rank local response updates superpose when separated, but overlapping finite updates interfere nonlinearly.</text>
+</svg>
