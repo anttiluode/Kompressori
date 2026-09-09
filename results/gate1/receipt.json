@@ -1,0 +1,43 @@
+{
+  "gate": "G1_future_only_mask_search",
+  "claim_tested": "Future fidelity is a reliable proxy for response-geometry fidelity.",
+  "result": "not supported in this toy search",
+  "grid": 64,
+  "target_steps": 350,
+  "horizon": 50,
+  "fraction": 0.05,
+  "candidates": 200,
+  "probe_seeds": 5,
+  "probe_epsilon": 0.002,
+  "mask_seed_base": 1000000,
+  "future_response_pearson": 0.02596707324367346,
+  "future_corr_median": 0.28874520895693195,
+  "response_corr_mean_all": 0.1964527972570427,
+  "response_corr_mean_top10_future": 0.18122193470117273,
+  "response_corr_mean_bottom10_future": 0.19241490993722957,
+  "best_future_mask": {
+    "candidate": 38,
+    "future_rank": 0,
+    "future_corr": 0.34439920088432907,
+    "response_corr_mean": 0.06966329458742118,
+    "response_corr_std": 0.13377601540401776,
+    "response_gain_mean": 3.2932299455145886
+  },
+  "best_response_mask": {
+    "candidate": 95,
+    "future_rank": 70,
+    "future_corr": 0.2964718256572557,
+    "response_corr_mean": 0.33981803093826146,
+    "response_corr_std": 0.10001612759633215,
+    "response_gain_mean": 2.693121105448258
+  },
+  "probe_locations": [
+    {"seed": 0, "x": 8.810879264165564, "y": 15.487495536578187},
+    {"seed": 1, "x": 52.28353732756511, "y": 40.10808685786143},
+    {"seed": 2, "x": 19.474595381100336, "y": 59.23776152042817},
+    {"seed": 3, "x": 13.977735607201474, "y": 54.000440984611046},
+    {"seed": 4, "x": 4.684318224668871, "y": 44.92434711435606}
+  ],
+  "receipt_command": "python gate1_search.py --horizon 50 --candidates 200 --probe-seeds 5",
+  "interpretation": "At fixed 5% random observation, future fidelity and unseen-perturbation response fidelity were essentially uncorrelated across 200 masks. The mask selected solely for the best future score had poor response fidelity. This is a toy counterexample to using replay/output fidelity as the only guard; it is not evidence that this relation holds generally."
+}
