@@ -1,95 +1,105 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kompressori — future vs response geometry</title>
+<title>Kompressori — response geometry</title>
 <style>
-:root{--bg:#0b0d12;--card:#151922;--fg:#eef2ff;--muted:#9aa4bd;--line:#2a3140;--accent:#f6c85f}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}
-main{max-width:1120px;margin:auto;padding:48px 20px 72px} h1{font-size:clamp(2.5rem,7vw,6rem);line-height:.92;margin:0 0 18px} h2{margin-top:0}
-.lead{font-size:1.25rem;max-width:850px;color:#cbd3e6}.heroimg{width:100%;border-radius:18px;border:1px solid var(--line);margin:24px 0;display:block;background:#fff}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin:30px 0}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}.big{font-size:2.6rem;font-weight:750}.small{color:var(--muted)}
-canvas{width:100%;height:360px;background:#0f1218;border-radius:14px} code{color:#ffd979}.badge{display:inline-block;border:1px solid #49546b;border-radius:999px;padding:5px 10px;color:#c9d2e8;margin:0 6px 6px 0}a{color:#9cc8ff}.gate{margin:52px 0}.sweep{width:100%;display:block;border-radius:18px;border:1px solid var(--line);background:#0f1218}.arrow{font-size:1.15rem;color:#cbd3e6}.warn{border-left:3px solid var(--accent);padding-left:14px;color:#cbd3e6}footer{margin-top:48px;color:var(--muted)}
+:root{--bg:#0a0d12;--card:#141a24;--fg:#edf3ff;--muted:#9aa7bf;--line:#2b3546;--accent:#f6c85f;--green:#69d6ad}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 20% 0,#131927 0,#0a0d12 42%);color:var(--fg);font:16px/1.55 system-ui,sans-serif}
+main{max-width:1120px;margin:auto;padding:52px 20px 90px}h1{font-size:clamp(3rem,8vw,6.7rem);line-height:.9;letter-spacing:-.04em;margin:12px 0 24px}h2{font-size:clamp(1.7rem,4vw,2.7rem);line-height:1.08;margin:0 0 15px}.lead{font-size:1.25rem;max-width:880px;color:#cad4e8}.badge{display:inline-block;border:1px solid #46536b;border-radius:999px;padding:5px 11px;color:#cbd5e8;margin:0 7px 7px 0}.gate{margin:66px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:17px;margin:24px 0}.card{background:linear-gradient(180deg,#171d28,#121721);border:1px solid var(--line);border-radius:18px;padding:20px}.big{font-size:2.45rem;font-weight:780;letter-spacing:-.03em}.small{color:var(--muted)}.hero,.figure{width:100%;display:block;border-radius:18px;border:1px solid var(--line);margin:24px 0;background:#0f1218}.hero{background:white}.warn{border-left:3px solid var(--accent);padding:4px 0 4px 16px;color:#cbd4e5}.key{border-left:3px solid var(--green);padding:4px 0 4px 16px;color:#d9f7ec}.flow{font:600 17px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;background:#10151e;border:1px solid var(--line);padding:19px;border-radius:16px;white-space:pre-wrap;color:#d9e4f7}a{color:#9dccff}footer{margin-top:70px;color:var(--muted);border-top:1px solid var(--line);padding-top:25px}
 </style></head><body><main>
-<span class="badge">PhiWorld descendant</span><span class="badge">G0–G4</span><span class="badge">reproducible receipts</span>
-<h1>Compress the state.<br>Did you compress its <em>response?</em></h1>
-<p class="lead">Kompressori began with an old partial-field / “hologram?” experiment. The more useful question turned out to be different: can a compressed state reproduce the visible future while becoming a different machine when the next perturbation arrives?</p>
-<img class="heroimg" src="legacy/example_reconstructions.png" alt="Legacy PhiWorld partial-field reconstruction examples">
+<span class="badge">PhiWorld descendant</span><span class="badge">G0–G7</span><span class="badge">reproducible toy experiments</span>
+<h1>Compress the state.<br>Did you compress its <em>future response?</em></h1>
+<p class="lead">Kompressori began with an old partial-field / “hologram?” experiment. The useful thing was not holography. It was the discovery that a state can preserve a recognizable future while losing the geometry that determines what the <strong>next perturbation</strong> will become.</p>
+<img class="hero" src="legacy/example_reconstructions.png" alt="Legacy PhiWorld partial-field reconstruction examples">
 
 <section class="gate">
-<h2>Gate 0 — same-looking future, different response</h2>
+<span class="badge">G0–G2</span><h2>Replay is not the operator</h2>
 <div class="grid">
-  <div class="card"><div class="small">5% edge-shaped cue</div><div class="big">0.408</div><div>future correlation</div></div>
-  <div class="card"><div class="small">same cue, same tiny perturbation</div><div class="big">0.004</div><div>response correlation</div></div>
-  <div class="card"><div class="small">response magnitude</div><div class="big">4.39×</div><div>full-state response</div></div>
+<div class="card"><div class="small">G0 · 5% edge-shaped cue</div><div class="big">0.408</div><div>future correlation</div><br><div class="big">0.004</div><div>response correlation</div></div>
+<div class="card"><div class="small">G1 · across 200 masks</div><div class="big">r = 0.026</div><div>future fidelity vs unseen response fidelity</div></div>
+<div class="card"><div class="small">G2 · held-out response error</div><div class="big">2.035 → 2.131</div><div>guarding a few response probes still did not generalize</div></div>
 </div>
-<div class="grid"><div class="card"><h2>Future fidelity</h2><canvas id="future"></canvas></div><div class="card"><h2>Response fidelity</h2><canvas id="response"></canvas></div></div>
-<div class="card"><p><code>full state → future</code> versus <code>partial state → future</code>, then repeat after the same tiny Gaussian displacement and compare the <em>difference</em> trajectories. Matching today's trajectory is not enough.</p><p class="small">The field uses periodic boundaries. “edge” is only an observation-mask geometry, not a physical boundary.</p></div>
+<div class="flow">replay old outputs      ≠ preserve response geometry
+probe a few responses   ≠ certify the whole operator</div>
 </section>
 
 <section class="gate">
-<span class="badge">Gate 1</span>
-<h2>Optimizing replay did not recover response geometry</h2>
+<span class="badge">G3</span><h2>A can prepare the response to B</h2>
+<p>A finite packet A is applied, the field evolves, then a much smaller B probes the changed response geometry. Tiny A stays essentially linear; a selected finite-A nearby pair reaches 1.466× transfer gain.</p>
+<img class="figure" src="results/gate3/amplitude_sweep.svg" alt="Gate 3 amplitude sweep">
+<p class="warn">The 1.466× pair was deliberately selected from 300 pairs. G3 is an existence example, not a prevalence estimate.</p>
+</section>
+
+<section class="gate">
+<span class="badge">G4</span><h2>The effect is a window, not a global mode</h2>
 <div class="grid">
- <div class="card"><div class="small">future ↔ response across 200 masks</div><div class="big">r = 0.026</div><div>almost no relation</div></div>
- <div class="card"><div class="small">best future-only mask</div><div class="big">0.070</div><div>mean response correlation on unseen probes</div></div>
- <div class="card"><div class="small">response-best mask</div><div class="big">71st</div><div>its rank by future fidelity</div></div>
+<div class="card"><div class="small">fixed pair peak</div><div class="big">1.624×</div><div>gain at delay 24</div></div>
+<div class="card"><div class="small">400-position B map</div><div class="big">13 / 400</div><div>positions above 1.1×</div></div>
+<div class="card"><div class="small">strongest hotspot</div><div class="big">2.13 cells</div><div>from A</div></div>
 </div>
-<p class="arrow">A compressor selected because it reproduces known trajectories can leave the local future operator badly wrong.</p>
+<img class="figure" src="results/gate4/delay_sweep.svg" alt="Gate 4 delay sweep">
+<p class="key">A creates a temporary local susceptibility pocket: nearby B can be suppressed, amplified, then suppressed again as the window moves through time.</p>
 </section>
 
 <section class="gate">
-<span class="badge">Gate 2</span>
-<h2>Then we guarded the response. The guard learned the probes.</h2>
-<p>The obvious repair was to test perturbation responses during compression. Six train/test splits used four localized probes for selection and four different probes for evaluation.</p>
+<span class="badge">G5</span><h2>Remove the post-selection. The local effect survives.</h2>
+<p>Thirty deterministic A locations, four B distances, four directions, five delays: <strong>2400 outcome-independent events</strong>.</p>
+<img class="figure" src="results/gate5/summary.svg" alt="Gate 5 deterministic transfer scan">
 <div class="grid">
- <div class="card"><div class="small">training response error</div><div class="big">2.161 → 1.826</div><div>response-aware selection improves it</div></div>
- <div class="card"><div class="small">held-out response error</div><div class="big">2.035 → 2.131</div><div>but unseen directions get slightly worse</div></div>
- <div class="card"><div class="small">held-out response correlation</div><div class="big">0.108 → 0.076</div><div>no operator-level generalization</div></div>
+<div class="card"><div class="small">distance 2</div><div class="big">45.5%</div><div>events above 1.1×</div></div>
+<div class="card"><div class="small">distance 4</div><div class="big">26.0%</div><div>events above 1.1×</div></div>
+<div class="card"><div class="small">distance ≥ 8</div><div class="big">0%</div><div>events above 1.1×</div></div>
+<div class="card"><div class="small">tiny-A near-field control</div><div class="big">1.0045×</div><div>maximum gain</div></div>
 </div>
-<p class="warn"><strong>Gate 2 failure is useful:</strong> at this 5% state-only budget, checking a few perturbations can itself be overfit. “I replayed the old answers” and even “I replayed a few local responses” are not the same as preserving the response geometry.</p>
+<p class="warn">This validates a common <strong>near-field nonlinear susceptibility</strong> in the toy field, while arguing against the more seductive travelling / long-range cascade story.</p>
 </section>
 
 <section class="gate">
-<span class="badge">Gate 3</span>
-<h2>A finite perturbation can prepare the next perturbation</h2>
-<p>Packet A is applied, the field evolves for 20 steps, then a much smaller packet B is applied. We subtract the A-only future and ask whether B's response gain changed.</p>
+<span class="badge">G6</span><h2>The whole operator is high-rank. Its local update is not.</h2>
+<img class="figure" src="results/gate6/summary.svg" alt="Gate 6 low-rank operator update">
 <div class="grid">
- <div class="card"><div class="small">tiny A, 300-pair search</div><div class="big">1.00029×</div><div>largest transfer gain — essentially linear</div></div>
- <div class="card"><div class="small">finite A, selected pair</div><div class="big">1.466×</div><div>B response gain after A</div></div>
- <div class="card"><div class="small">A→B separation</div><div class="big">2.38</div><div>grid cells on the periodic domain</div></div>
+<div class="card"><div class="small">base response operator J</div><div class="big">91 / 100</div><div>directions for 95% spectral energy</div></div>
+<div class="card"><div class="small">single A-induced ΔJ</div><div class="big">5 / 100</div><div>median directions for 95% energy</div></div>
+<div class="card"><div class="small">ΔJ median effective rank</div><div class="big">2.75</div><div>while ||ΔJ|| ≈ 15.5% of ||J||</div></div>
 </div>
-<img class="sweep" src="results/gate3/amplitude_sweep.svg" alt="Gate 3 amplitude sweep showing suppression then amplification of perturbation B after perturbation A">
-<p>The selected pair first suppresses B, then flips into amplification as A becomes large enough to move the delayed state by a few percent. The 1.466× result is stable as B is shrunk across a 16× amplitude range, which is evidence that B itself remains in a tangent-like probe regime.</p>
-<p class="warn">Pair 49 was selected as the maximum-gain example among 300 pairs. This is an <strong>existence example</strong>, not a prevalence estimate, not fluid blowup, and not a brain claim. Most tested pairs remained very close to gain 1.</p>
+<div class="flow">high-dimensional response operator J
+            + local event A
+                    ↓
+             low-rank ΔJ</div>
+<p class="key">The compressible object may be the <strong>operator update</strong>, not the whole operator.</p>
 </section>
 
 <section class="gate">
-<span class="badge">Gate 4</span>
-<h2>The amplifier is a local susceptibility window</h2>
-<p>Gate 4 characterizes the post-selected Gate 3 pair instead of pretending it is independent evidence. We sweep the A→B delay, then at the peak delay scan B over 400 positions.</p>
+<span class="badge">G7</span><h2>Separated updates add. Overlapping updates interfere.</h2>
+<img class="figure" src="results/gate7/summary.svg" alt="Gate 7 operator update composition">
 <div class="grid">
- <div class="card"><div class="small">fixed pair peak</div><div class="big">1.624×</div><div>transfer gain at delay 24</div></div>
- <div class="card"><div class="small">spatial scan maximum</div><div class="big">1.647×</div><div>near B=(16,32)</div></div>
- <div class="card"><div class="small">strong hotspot area</div><div class="big">13 / 400</div><div>positions above gain 1.1</div></div>
+<div class="card"><div class="small">8 farthest pairs</div><div class="big">4.48e−11</div><div>mean non-additivity error · essentially exact superposition</div></div>
+<div class="card"><div class="small">8 closest pairs · finite A</div><div class="big">0.654</div><div>mean non-additivity error</div></div>
+<div class="card"><div class="small">same near geometry · tiny A</div><div class="big">0.0188</div><div>returns toward superposition</div></div>
 </div>
-<img class="sweep" src="results/gate4/delay_sweep.svg" alt="Gate 4 transfer gain across A to B delay">
-<p>The same interaction is slightly suppressive at some delays, strongly amplifying around steps 18–30, and suppressive again later. At the peak delay, the mean gain over the whole B-position map is only <strong>1.011×</strong>; only three of 400 positions exceed 1.4×, and the maximum sits just 2.13 cells from A.</p>
-<p class="warn">So the present toy result is not a globally growing mode. It looks more like a <strong>temporary local pocket of altered response geometry</strong>: a nearby event arriving in the right time window sees a different machine.</p>
+<div class="flow">far apart:      ΔJ_AB ≈ ΔJ_A + ΔJ_B
+near + finite:   ΔJ_AB ≠ ΔJ_A + ΔJ_B</div>
+<p class="key">In this toy field, interference appears when low-rank local response-geometry updates overlap.</p>
 </section>
 
 <section class="gate">
-<h2>Where this now points</h2>
-<div class="card">
-<p><code>G5</code> independent coarse A×B×delay scan: how common are these windows when pair 49 is no longer privileged?</p>
-<p><code>G6</code> compare state-only compression with a small tangent / impulse sketch.</p>
-<p><code>G7</code> let response geometry change slowly and test when local transfer becomes runaway amplification.</p>
-<p><code>G8</code> move the distinction into learning: preserve stored answers versus preserve nearby response geometry.</p>
-</div>
+<h2>What the old PhiWorld question turned into</h2>
+<div class="flow">Can a fragment reconstruct the field?
+              ↓ mostly no
+Can it reconstruct response geometry?
+              ↓ even less
+What does a local event change?
+              ↓ a susceptibility pocket
+What is compressible?
+              ↓ the operator update
+When do updates interfere?
+              ↓ when they overlap</div>
 </section>
-<footer>Source, scripts, and machine-readable receipts live in this repository. No holographic-principle, fluid/brain-equivalence, or Navier–Stokes claim is being made.</footer>
-</main>
-<script>
-const data={"random":{"1%":{"future_corr":0.109,"response_corr":0.116},"2%":{"future_corr":0.200,"response_corr":0.102},"5%":{"future_corr":0.285,"response_corr":0.175},"10%":{"future_corr":0.376,"response_corr":0.317},"25%":{"future_corr":0.517,"response_corr":0.481},"50%":{"future_corr":0.622,"response_corr":0.356}},"center":{"1%":{"future_corr":0.099,"response_corr":0.037},"2%":{"future_corr":0.086,"response_corr":0.037},"5%":{"future_corr":0.109,"response_corr":0.037},"10%":{"future_corr":0.172,"response_corr":0.037},"25%":{"future_corr":0.202,"response_corr":0.098},"50%":{"future_corr":0.119,"response_corr":0.133}},"ring":{"1%":{"future_corr":0.054,"response_corr":0.083},"2%":{"future_corr":0.095,"response_corr":0.088},"5%":{"future_corr":0.141,"response_corr":0.105},"10%":{"future_corr":0.213,"response_corr":0.125},"25%":{"future_corr":0.214,"response_corr":0.102},"50%":{"future_corr":0.306,"response_corr":0.313}},"edge":{"1%":{"future_corr":0.340,"response_corr":0.037},"2%":{"future_corr":0.392,"response_corr":0.035},"5%":{"future_corr":0.408,"response_corr":0.004},"10%":{"future_corr":0.318,"response_corr":-0.033},"25%":{"future_corr":-0.034,"response_corr":-0.179},"50%":{"future_corr":-0.023,"response_corr":-0.018}},"energy":{"1%":{"future_corr":0.167,"response_corr":0.020},"2%":{"future_corr":0.180,"response_corr":0.040},"5%":{"future_corr":0.195,"response_corr":0.271},"10%":{"future_corr":0.294,"response_corr":0.290},"25%":{"future_corr":0.487,"response_corr":0.423},"50%":{"future_corr":0.665,"response_corr":0.516}}};
-const fractions=[1,2,5,10,25,50], kinds=Object.keys(data), colors=['#f6c85f','#6f9ceb','#e683ae','#65d6ad','#ff8a65'];
-function draw(id,key){const c=document.getElementById(id),dpr=devicePixelRatio||1,r=c.getBoundingClientRect();c.width=r.width*dpr;c.height=r.height*dpr;const x=c.getContext('2d');x.scale(dpr,dpr);const W=r.width,H=r.height,p=42;x.strokeStyle='#334';x.lineWidth=1;x.beginPath();x.moveTo(p,12);x.lineTo(p,H-p);x.lineTo(W-12,H-p);x.stroke();x.font='12px system-ui';x.fillStyle='#9aa4bd';x.fillText('correlation',8,16);x.fillText('% observed',W-74,H-10);[-0.2,0,.2,.4,.6,.8].forEach(v=>{let yy=12+(0.8-v)*(H-p-12);x.strokeStyle='#202634';x.beginPath();x.moveTo(p,yy);x.lineTo(W-12,yy);x.stroke();x.fillStyle='#8993aa';x.fillText(v.toFixed(1),7,yy+4)});fractions.forEach((f,i)=>{let xx=p+i*(W-p-18)/(fractions.length-1);x.fillStyle='#8993aa';x.fillText(f+'%',xx-8,H-p+18)});kinds.forEach((kind,ki)=>{x.strokeStyle=colors[ki];x.fillStyle=colors[ki];x.lineWidth=2;x.beginPath();fractions.forEach((f,i)=>{let v=data[kind][f+'%'][key],xx=p+i*(W-p-18)/(fractions.length-1),yy=12+(0.8-v)*(H-p-12);i?x.lineTo(xx,yy):x.moveTo(xx,yy)});x.stroke();fractions.forEach((f,i)=>{let v=data[kind][f+'%'][key],xx=p+i*(W-p-18)/(fractions.length-1),yy=12+(0.8-v)*(H-p-12);x.beginPath();x.arc(xx,yy,3,0,Math.PI*2);x.fill()});x.fillText(kind,W-100,24+ki*17)});}
-draw('future','future_corr');draw('response','response_corr');addEventListener('resize',()=>{draw('future','future_corr');draw('response','response_corr')});
-</script></body></html>
+
+<section class="gate"><h2>Next</h2><div class="grid">
+<div class="card"><strong>G8</strong><br><span class="small">Can a small learned basis predict ΔJ at unseen A locations?</span></div>
+<div class="card"><strong>G9</strong><br><span class="small">Does low-rank subspace overlap predict interference better than Euclidean distance?</span></div>
+<div class="card"><strong>G10</strong><br><span class="small">Make updates persistent: when do local memories remain independent versus collapse?</span></div>
+</div></section>
+
+<footer>All headline numbers have machine-readable receipts in <code>results/gate*/receipt.json</code>. This is a toy nonlinear field experiment: no holographic-principle, fluid/brain-equivalence, or Navier–Stokes claim is being made. <a href="https://github.com/anttiluode/Kompressori">Source on GitHub</a>.</footer>
+</main></body></html>
