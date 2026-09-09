@@ -4,6 +4,7 @@ import numpy as np
 import kompressori as k
 import gate2_crossvalidate as g2
 import gate3_transfer as g3
+import gate5_unbiased_scan as g5
 
 
 class KompressoriTests(unittest.TestCase):
@@ -58,6 +59,21 @@ class KompressoriTests(unittest.TestCase):
         )
         self.assertAlmostEqual(row["transfer_gain"], 1.0, places=10)
         self.assertAlmostEqual(row["response_corr"], 1.0, places=10)
+
+    def test_gate5_locations_are_deterministic_and_unique(self):
+        a = g5.deterministic_a_locations(40, 30)
+        b = g5.deterministic_a_locations(40, 30)
+        self.assertEqual(a, b)
+        self.assertEqual(len(a), 30)
+        self.assertEqual(len(set(a)), 30)
+        self.assertEqual(a[0], (7, 3))
+
+    def test_gate5_summary_counts_thresholds(self):
+        s = g5.summarize([0.8, 1.0, 1.2, 1.4])
+        self.assertEqual(s["count"], 4)
+        self.assertAlmostEqual(s["mean"], 1.1)
+        self.assertAlmostEqual(s["fraction_gain_gt_1_1"], 0.5)
+        self.assertAlmostEqual(s["fraction_gain_lt_0_9"], 0.25)
 
 
 if __name__ == "__main__":
