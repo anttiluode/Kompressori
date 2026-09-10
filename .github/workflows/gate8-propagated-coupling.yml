@@ -1,0 +1,51 @@
+name: Kompressori Gate 8 propagated coupling
+
+on:
+  pull_request:
+    paths:
+      - "PRIOR_ART_KILL_2026.md"
+      - "GATE8_PROPAGATED_COUPLING_PROTOCOL.md"
+      - "gate8_propagated_coupling.py"
+      - "gate7_update_composition.py"
+      - "gate6_lowrank_update.py"
+      - "gate5_unbiased_scan.py"
+      - "gate4_kernel.py"
+      - "gate3_transfer.py"
+      - "kompressori.py"
+      - ".github/workflows/gate8-propagated-coupling.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gate8:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install numpy
+      - name: Smoke imports and frozen pair selector
+        run: |
+          python - <<'PY'
+          import gate5_unbiased_scan as g5
+          import gate8_propagated_coupling as g8
+          sites=g5.deterministic_a_locations(40,30)
+          pairs=g8.heldout_pairs(sites,40)
+          assert len(pairs)==48
+          assert len({(x['i'],x['j']) for x in pairs})==48
+          print(pairs[:3], pairs[-3:])
+          PY
+      - name: Run preregistered Gate 8
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python gate8_propagated_coupling.py --out results/gate8/receipt.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gate8-propagated-coupling-receipt
+          path: results/gate8/receipt.json
+          retention-days: 90
