@@ -137,11 +137,11 @@ This explains why locality is a useful starting structure but does not guarantee
 If each local difference is approximated by $\widehat{\Delta K_t}$, using the true surrounding propagators gives the error certificate
 
 $$
-\|\Delta P_H-\widehat{\Delta P_H}\|_2
+\Vert \Delta P_H-\widehat{\Delta P_H}\Vert _2
 \le \sum_t
-\|P_{\mathrm{after},t}^A\|_2
-\|\Delta K_t-\widehat{\Delta K_t}\|_2
-\|P_{\mathrm{before},t}^0\|_2.
+\Vert P_{\mathrm{after},t}^A\Vert _2
+\Vert \Delta K_t-\widehat{\Delta K_t}\Vert _2
+\Vert P_{\mathrm{before},t}^0\Vert _2.
 $$
 
 This is an a posteriori bound, not automatically a cheap algorithm: the surrounding propagators must still be obtained or bounded.
@@ -192,7 +192,7 @@ For any smooth response family, the interaction is exactly
 $$
 J(a,b)-J(a,0)-J(0,b)+J(0,0)
 =\int_0^a\int_0^b
-\frac{\partial^2J}{\partial u\,\partial v}(u,v)\,dv\,du.
+\frac{\partial^2J}{\partial u \partial v}(u,v) dv du.
 $$
 
 That mixed curvature is the direct mathematical object behind non-additivity. Under bounded derivatives, the absolute interaction is $O(ab)$ near zero. This provides a clean amplitude-scaling test alongside an overlap predictor.
