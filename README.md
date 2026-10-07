@@ -1,5 +1,10 @@
 # Kompressori
 
+EDIT: 
+Sol 61 max wrote this paper : 
+https://github.com/anttiluode/Kompressori/blob/main/Kompressori_exact_response.md 
+Inspired by the new openai math breakthroughs. (Does not show correctly in github) 
+
 ![legacy PhiWorld partial reconstructions](legacy/example_reconstructions.png)
 
 **Compress the state. Then ask whether you also compressed the future operator.**
