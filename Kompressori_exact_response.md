@@ -36,117 +36,117 @@ The calculation ran with Python 3.12.14 and NumPy 2.3.5. It changed no GitHub fi
 
 ## 1. Analytic tangent equation
 
-Let \(L\) be the periodic five-point Laplacian, and write the acceleration as
+Let $L$ be the periodic five-point Laplacian, and write the acceleration as
 
-\[
+$$
 f(\phi)=c(\phi)\odot L\phi+\lambda\phi-\mu\phi^{\odot3}-\beta L^2\phi,
 \qquad
 c(u)=\frac{c_0^2}{1+\alpha u^2+10^{-9}}.
-\]
+$$
 
-Here \(\lambda=1\), \(\mu=0.2\), \(\alpha=5\), \(c_0^2=1\), and \(\beta=0.02\). The time step is \(h=0.08\) and damping is \(\eta=0.001\).
+Here $\lambda=1$, $\mu=0.2$, $\alpha=5$, $c_0^2=1$, and $\beta=0.02$. The time step is $h=0.08$ and damping is $\eta=0.001$.
 
 Set
 
-\[
+$$
 d=1-\eta h,\qquad
 q(\phi)=c'(\phi)\odot L\phi+\lambda\mathbf1-3\mu\phi^{\odot2}.
-\]
+$$
 
 Differentiating the code gives
 
-\[
+$$
 Df(\phi)v
 =\operatorname{diag}(c(\phi))Lv
 +\operatorname{diag}(q(\phi))v-\beta L^2v.
-\]
+$$
 
-For the state \(s=(\phi,\phi_{\mathrm{old}})\), the next-step Jacobian is therefore
+For the state $s=(\phi,\phi_{\mathrm{old}})$, the next-step Jacobian is therefore
 
-\[
+$$
 K(\phi)=
 \begin{pmatrix}
 (1+d)I+h^2\bigl[\operatorname{diag}(c)L+
 \operatorname{diag}(q)-\beta L^2\bigr] & -dI\\
 I&0
 \end{pmatrix}.
-\]
+$$
 
 The probe propagates perturbations with this equation while evolving the ordinary field with the unchanged engine. Responses are collected after each step, excluding the directly injected input at time zero, matching Gate 6.
 
 ## 2. Local row decomposition and rank bound
 
-Compare two present fields \(\phi_A\) and \(\phi_0\). Terms independent of the present field cancel:
+Compare two present fields $\phi_A$ and $\phi_0$. Terms independent of the present field cancel:
 
-\[
+$$
 \Delta K=h^2
 \begin{pmatrix}
 \operatorname{diag}(\Delta c)L+\operatorname{diag}(\Delta q)&0\\
 0&0
 \end{pmatrix}.
-\]
+$$
 
-Let \(S\) contain the sites where \(\Delta c_i\) or \(\Delta q_i\) is nonzero. Every changed row is a rank-one contribution, so
+Let $S$ contain the sites where $\Delta c_i$ or $\Delta q_i$ is nonzero. Every changed row is a rank-one contribution, so
 
-\[
+$$
 \operatorname{rank}(\Delta K)\le |S|.
-\]
+$$
 
-If the two fields differ at just one cell \(j\), then:
+If the two fields differ at just one cell $j$, then:
 
-1. \(\Delta c\) is supported only at \(j\).
-2. At every other cell, \(c'\) and the local potential derivative are unchanged.
-3. \(\Delta L\phi\) is supported at \(j\) and its four nearest neighbours.
-4. Hence \(\Delta q\) is supported on those same five cells.
+1. $\Delta c$ is supported only at $j$.
+2. At every other cell, $c'$ and the local potential derivative are unchanged.
+3. $\Delta L\phi$ is supported at $j$ and its four nearest neighbours.
+4. Hence $\Delta q$ is supported on those same five cells.
 
 Thus, on the 40 × 40 periodic grid,
 
-\[
+$$
 \boxed{\operatorname{rank}(\Delta K)\le5.}
-\]
+$$
 
 The biharmonic term does not enlarge this bound: its Jacobian is state-independent and cancels in the difference. Changes to the previous field alone also do not change this next-step Jacobian, because the previous-field dependence is affine.
 
-A generic seven-by-seven numerical example attained rank five. The explicit row decomposition agreed with the directly constructed Jacobian difference to relative error \(3.69\times10^{-14}\).
+A generic seven-by-seven numerical example attained rank five. The explicit row decomposition agreed with the directly constructed Jacobian difference to relative error $3.69\times10^{-14}$.
 
 **Boundary:** the repository's Gaussian preparation packets have nonzero tails throughout the grid. They are not literal one-cell writes. The rank-five theorem therefore does not directly certify their finite-time update. It identifies the local structure of the implemented sensitivity law.
 
 ## 3. What happens over several steps
 
-Let \(K_t^A\) and \(K_t^0\) be the Jacobians along the prepared and unprepared trajectories. For a final-time state response, the exact telescoping identity is
+Let $K_t^A$ and $K_t^0$ be the Jacobians along the prepared and unprepared trajectories. For a final-time state response, the exact telescoping identity is
 
-\[
+$$
 P_H^A-P_H^0
 =\sum_{t=0}^{H-1}
 \bigl(K_{H-1}^A\cdots K_{t+1}^A\bigr)
 \bigl(K_t^A-K_t^0\bigr)
 \bigl(K_{t-1}^0\cdots K_0^0\bigr).
-\]
+$$
 
 Empty products are identities.
 
-Each term first transports an incoming perturbation to time \(t\), passes it through a changed local sensitivity, and transports the result onward. Rank cannot increase when a term is multiplied on either side, but adding contributions can increase their joint rank. In particular,
+Each term first transports an incoming perturbation to time $t$, passes it through a changed local sensitivity, and transports the result onward. Rank cannot increase when a term is multiplied on either side, but adding contributions can increase their joint rank. In particular,
 
-\[
+$$
 \operatorname{rank}(P_H^A-P_H^0)
 \le \min\left(2N,\sum_{t=0}^{H-1}|S_t|\right).
-\]
+$$
 
 This explains why locality is a useful starting structure but does not guarantee a fixed tiny rank over a long horizon. A compact approximation also requires the transported contributions to remain concentrated in a small number of modes.
 
-If each local difference is approximated by \(\widehat{\Delta K_t}\), using the true surrounding propagators gives the error certificate
+If each local difference is approximated by $\widehat{\Delta K_t}$, using the true surrounding propagators gives the error certificate
 
-\[
+$$
 \|\Delta P_H-\widehat{\Delta P_H}\|_2
 \le \sum_t
 \|P_{\mathrm{after},t}^A\|_2
 \|\Delta K_t-\widehat{\Delta K_t}\|_2
 \|P_{\mathrm{before},t}^0\|_2.
-\]
+$$
 
 This is an a posteriori bound, not automatically a cheap algorithm: the surrounding propagators must still be obtained or bounded.
 
-A six-step, four-by-four dense-matrix check verified the telescoping identity to relative error \(1.07\times10^{-13}\). For a whole response trajectory, apply the same identity to each observation time and stack the outputs.
+A six-step, four-by-four dense-matrix check verified the telescoping identity to relative error $1.07\times10^{-13}$. For a whole response trajectory, apply the same identity to each observation time and stack the outputs.
 
 ## 4. Fresh numerical checks
 
@@ -154,9 +154,9 @@ The analytic trajectory derivative was compared with central differences of the 
 
 | Central-difference amplitude | Relative error |
 |---:|---:|
-| \(10^{-3}\) | \(6.79\times10^{-7}\) |
-| \(10^{-4}\) | \(6.79\times10^{-9}\) |
-| \(10^{-5}\) | \(7.72\times10^{-11}\) |
+| $10^{-3}$ | $6.79\times10^{-7}$ |
+| $10^{-4}$ | $6.79\times10^{-9}$ |
+| $10^{-5}$ | $7.72\times10^{-11}$ |
 
 The quadratic convergence supports the derivative implementation.
 
@@ -167,7 +167,7 @@ Two additional pairs were chosen solely by the existing distance rule, not by th
 | Pair | Indices | Distance | Exact-tangent relative non-additivity |
 |---|---|---:|---:|
 | First closest pair | 0, 12 | 5.656854 | 1.085702 |
-| Last farthest pair | 9, 29 | 28.284271 | \(3.62\times10^{-13}\) |
+| Last farthest pair | 9, 29 | 28.284271 | $3.62\times10^{-13}$ |
 
 These are two diagnostic checks, not a rerun of Gate 7's complete pair panel. A relative non-additivity above one is valid: the norm of the error can exceed the norm of the actual joint update.
 
@@ -177,25 +177,25 @@ Gate 9 proposes asking whether low-rank subspace overlap predicts interference b
 
 For a simple counterexample, consider the smooth response family
 
-\[
+$$
 J(a,b)=
 \begin{pmatrix}
 1+a&\kappa ab\\
 0&1+b
 \end{pmatrix}.
-\]
+$$
 
-The isolated updates \(aE_{11}\) and \(bE_{22}\) have orthogonal input and output subspaces. Nevertheless the joint update contains the nonzero interaction \(\kappa abE_{12}\).
+The isolated updates $aE_{11}$ and $bE_{22}$ have orthogonal input and output subspaces. Nevertheless the joint update contains the nonzero interaction $\kappa abE_{12}$.
 
 For any smooth response family, the interaction is exactly
 
-\[
+$$
 J(a,b)-J(a,0)-J(0,b)+J(0,0)
 =\int_0^a\int_0^b
 \frac{\partial^2J}{\partial u\,\partial v}(u,v)\,dv\,du.
-\]
+$$
 
-That mixed curvature is the direct mathematical object behind non-additivity. Under bounded derivatives, the absolute interaction is \(O(ab)\) near zero. This provides a clean amplitude-scaling test alongside an overlap predictor.
+That mixed curvature is the direct mathematical object behind non-additivity. Under bounded derivatives, the absolute interaction is $O(ab)$ near zero. This provides a clean amplitude-scaling test alongside an overlap predictor.
 
 The counterexample does not disprove overlap as a useful predictor in Kompressori. It prevents promoting an empirical correlation into an unjustified general law.
 
