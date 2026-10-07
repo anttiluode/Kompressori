@@ -57,8 +57,8 @@ Differentiating the code gives
 
 $$
 Df(\phi)v
-=\operatorname{diag}(c(\phi))Lv
-+\operatorname{diag}(q(\phi))v-\beta L^2v.
+=\mathrm{diag}(c(\phi))Lv
++\mathrm{diag}(q(\phi))v-\beta L^2v.
 $$
 
 For the state $s=(\phi,\phi_{\mathrm{old}})$, the next-step Jacobian is therefore
@@ -66,8 +66,8 @@ For the state $s=(\phi,\phi_{\mathrm{old}})$, the next-step Jacobian is therefor
 $$
 K(\phi)=
 \begin{pmatrix}
-(1+d)I+h^2\bigl[\operatorname{diag}(c)L+
-\operatorname{diag}(q)-\beta L^2\bigr] & -dI\\
+(1+d)I+h^2\bigl[\mathrm{diag}(c)L+
+\mathrm{diag}(q)-\beta L^2\bigr] & -dI\\
 I&0
 \end{pmatrix}.
 $$
@@ -81,7 +81,7 @@ Compare two present fields $\phi_A$ and $\phi_0$. Terms independent of the prese
 $$
 \Delta K=h^2
 \begin{pmatrix}
-\operatorname{diag}(\Delta c)L+\operatorname{diag}(\Delta q)&0\\
+\mathrm{diag}(\Delta c)L+\mathrm{diag}(\Delta q)&0\\
 0&0
 \end{pmatrix}.
 $$
@@ -89,7 +89,7 @@ $$
 Let $S$ contain the sites where $\Delta c_i$ or $\Delta q_i$ is nonzero. Every changed row is a rank-one contribution, so
 
 $$
-\operatorname{rank}(\Delta K)\le |S|.
+\mathrm{rank}(\Delta K)\le |S|.
 $$
 
 If the two fields differ at just one cell $j$, then:
@@ -102,7 +102,7 @@ If the two fields differ at just one cell $j$, then:
 Thus, on the 40 × 40 periodic grid,
 
 $$
-\boxed{\operatorname{rank}(\Delta K)\le5.}
+\boxed{\mathrm{rank}(\Delta K)\le5.}
 $$
 
 The biharmonic term does not enlarge this bound: its Jacobian is state-independent and cancels in the difference. Changes to the previous field alone also do not change this next-step Jacobian, because the previous-field dependence is affine.
@@ -128,7 +128,7 @@ Empty products are identities.
 Each term first transports an incoming perturbation to time $t$, passes it through a changed local sensitivity, and transports the result onward. Rank cannot increase when a term is multiplied on either side, but adding contributions can increase their joint rank. In particular,
 
 $$
-\operatorname{rank}(P_H^A-P_H^0)
+\mathrm{rank}(P_H^A-P_H^0)
 \le \min\left(2N,\sum_{t=0}^{H-1}|S_t|\right).
 $$
 
