@@ -1,9 +1,6 @@
 # Kompressori
 
-EDIT: 
-Sol 61 max wrote this paper : 
-https://github.com/anttiluode/Kompressori/blob/main/Kompressori_exact_response.md 
-Inspired by the new openai math breakthroughs. (Does not show correctly in github) 
+**New research note — 7 October 2026:** [Exact response propagation and a local rank bound](Kompressori_exact_response.md), written with Sol 61 max and inspired by OpenAI’s new mathematics release. It includes the analytic sensitivity equations, a one-step rank bound, and a reproducible check of Gate 6.
 
 ![legacy PhiWorld partial reconstructions](legacy/example_reconstructions.png)
 
